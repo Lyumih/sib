@@ -615,30 +615,57 @@ $sib_hero $mol_page
 		<= Skill_title $mol_paragraph title \Умения
 		<= Stats_title $mol_paragraph title \Статистика
 
-$sib_island $mol_page
-	title \Архипелаг
-	body /
-		<= Island_title $mol_paragraph title \Острова
-		<= Island_count $mol_paragraph title <= island_count \
-		<= Island_list $mol_list rows <= island_list /
-			<= Island*0 $mol_row sub /
-				<= Island_name* $mol_paragraph title <= island_name* \
-				<= Scene_count* $mol_paragraph title <= scene_count* \
-				<= Start_button* $mol_button_major
-					title <= status_button* \
-					click? <=> start*? null
-					enabled <= start_enabled* false
-
-$sib_create $mol_page
-	title \Вдохновение
-	body /
-
 $mol_book2 $mol_scroll
 	menu_title \
 	sub <= pages /$mol_view
 	minimal_width 0
 	Placeholder $mol_view
 	Gap* $mol_view title \
+
+$sib_scene $mol_page
+	title <= island_name \Остров
+	island_id \
+	step \0
+	body /
+		<= Images $mol_row sub /
+			<= Image_left $mol_view
+			<= Image_center $mol_view
+			<= Image_right $mol_view
+		<= Dialog $mol_list rows /
+			<= Question $mol_text text <= question? \Вопрос 1
+			- <= Answer_list $mol_view sub /
+				<= Answer $mol_button_minor
+					title \Ответ 1
+		- <= Panel $mol_row sub /
+			<= Item_list $mol_row sub /
+				<= Item $mol_button_minor title \Лопата
+			<= Skill_list $mol_row sub /
+				<= Skill $mol_button_minor title \Лечение
+			<= Action_list $mol_row sub /
+				<= Exit $mol_button_minor title \Выйти
+
+$sib_island $mol_book2
+	pages /
+		<= Island_page $mol_page
+			title \Архипелаг
+			body /
+				<= Island_title $mol_paragraph title <= island_count \
+				<= Island_list $mol_list rows <= island_list /
+					<= Island*0 $mol_row sub /
+						<= Island_name* $mol_labeler
+							title <= island_name* \
+							content / 
+								<= scene_count* \
+						<= Start_button* $mol_button_major
+							title <= status_button* \
+							click? <=> start*? null
+							enabled <= start_enabled* false
+		<= Scene $sib_scene
+			island_id <= current_island \quest-1
+
+$sib_create $mol_page
+	title \Вдохновение
+	body /
 
 $mol_pop $mol_view
 	showed? false
@@ -796,6 +823,6 @@ $sib_app $mol_page
 			spreads *
 				\
 					<= About_page $sib_about
-				hero_page <= Hero_page $sib_hero
-				island_page <= Island_page $sib_island
-				create <= Create_page $sib_create
+				h <= Hero_page $sib_hero
+				i <= Island_page $sib_island
+				c <= Create_page $sib_create
