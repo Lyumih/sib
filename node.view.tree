@@ -612,7 +612,7 @@ $sib_about $mol_page
 						value? <=> name? \capitan
 			buttons /
 				<= Login_submit $mol_button_major
-					title \Войти или зарегистрироваться
+					title \Войти
 					click? <=> signup? null
 					enabled <= signup_allowed false
 		<= Logout $mol_button_major
@@ -632,6 +632,16 @@ $sib_hero $mol_page
 $sib_island $mol_page
 	title \Архипелаг
 	body /
+		<= Island_title $mol_paragraph title \Острова
+		<= Island_count $mol_paragraph title <= island_count \
+		<= Island_list $mol_list rows <= island_list /
+			<= Island*0 $mol_row sub /
+				<= Island_name* $mol_paragraph title <= island_name* \
+				<= Scene_count* $mol_paragraph title <= scene_count* \
+				<= Start_button* $mol_button_major
+					title <= status_button* \
+					click? <=> start*? null
+					enabled <= start_enabled* false
 
 $sib_create $mol_page
 	title \Вдохновение

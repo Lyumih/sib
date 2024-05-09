@@ -8385,7 +8385,7 @@ var $;
 		}
 		Login_submit(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Войти или зарегистрироваться");
+			(obj.title) = () => ("Войти");
 			(obj.click) = (next) => ((this.signup(next)));
 			(obj.enabled) = () => ((this.signup_allowed()));
 			return obj;
@@ -8500,6 +8500,168 @@ var $;
 
 
 ;
+	($.$sib_island) = class $sib_island extends ($.$mol_page) {
+		Island_title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("Острова");
+			return obj;
+		}
+		island_count(){
+			return "";
+		}
+		Island_count(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.island_count()));
+			return obj;
+		}
+		island_name(id){
+			return "";
+		}
+		Island_name(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.island_name(id)));
+			return obj;
+		}
+		scene_count(id){
+			return "";
+		}
+		Scene_count(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.scene_count(id)));
+			return obj;
+		}
+		status_button(id){
+			return "";
+		}
+		start(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		start_enabled(id){
+			return false;
+		}
+		Start_button(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.status_button(id)));
+			(obj.click) = (next) => ((this.start(id, next)));
+			(obj.enabled) = () => ((this.start_enabled(id)));
+			return obj;
+		}
+		Island(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([
+				(this.Island_name(id)), 
+				(this.Scene_count(id)), 
+				(this.Start_button(id))
+			]);
+			return obj;
+		}
+		island_list(){
+			return [(this.Island("0"))];
+		}
+		Island_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.island_list()));
+			return obj;
+		}
+		title(){
+			return "Архипелаг";
+		}
+		body(){
+			return [
+				(this.Island_title()), 
+				(this.Island_count()), 
+				(this.Island_list())
+			];
+		}
+	};
+	($mol_mem(($.$sib_island.prototype), "Island_title"));
+	($mol_mem(($.$sib_island.prototype), "Island_count"));
+	($mol_mem_key(($.$sib_island.prototype), "Island_name"));
+	($mol_mem_key(($.$sib_island.prototype), "Scene_count"));
+	($mol_mem_key(($.$sib_island.prototype), "start"));
+	($mol_mem_key(($.$sib_island.prototype), "Start_button"));
+	($mol_mem_key(($.$sib_island.prototype), "Island"));
+	($mol_mem(($.$sib_island.prototype), "Island_list"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $sib_island extends $.$sib_island {
+            static islands(next) {
+                console.log('islands', next);
+                if (next === undefined && $mol_state_local.value('quest'))
+                    return $mol_state_local.value('quest');
+                return $mol_state_local.value('quest', next === null ? null : $sib_fetch.get('/quest'));
+            }
+            islands(next) {
+                return $sib_island.islands() || [];
+            }
+            island_list() {
+                return this.islands().map(island => this.Island(island.id));
+            }
+            get_island(id) {
+                return this.islands().find(island => island.id === id);
+            }
+            island_count() {
+                return `Кол-во: ${this.islands()?.length || 0}`;
+            }
+            island_name(id) {
+                return this.get_island(id)?.name || 'no name';
+            }
+            scene_count(id) {
+                return "Сцен: " + this.get_island(id)?.scenes?.length || '0';
+            }
+            status(id) {
+                return this.get_island(id)?.status || 'no status';
+            }
+            status_button(id) {
+                switch (this.get_island(id)?.status) {
+                    case 'open': return 'Начать';
+                    case 'active': return 'Продолжить';
+                    case 'closed': return 'Завершено';
+                    case 'denied': return 'Недоступно';
+                    default: return 'no status';
+                }
+            }
+            start_enabled(id) {
+                switch (this.get_island(id)?.status) {
+                    case 'open':
+                    case 'active': return true;
+                    default: return false;
+                }
+            }
+            start(id, next) {
+                console.log('start', id, next);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $sib_island.prototype, "islands", null);
+        __decorate([
+            $mol_mem
+        ], $sib_island.prototype, "island_list", null);
+        __decorate([
+            $mol_mem
+        ], $sib_island.prototype, "get_island", null);
+        __decorate([
+            $mol_mem
+        ], $sib_island.prototype, "island_count", null);
+        __decorate([
+            $mol_mem
+        ], $sib_island, "islands", null);
+        $$.$sib_island = $sib_island;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 "use strict";
 var $;
 (function ($) {
@@ -8508,13 +8670,15 @@ var $;
             return this.json_response(input, init);
         }
         json_response(input, init) {
+            console.log(input, init);
             const [url, params] = input.toString().split('?');
-            const body = JSON.parse(String(init?.body || {}));
-            console.log('MOCK REQUEST:', url, body, params);
+            const body = init?.body && JSON.parse(String(init.body));
+            console.log('MOCK REQUEST:', init?.method, url, body, params);
             switch (url) {
                 case '/auth': return this.auth(params, body);
                 case '/hero': return this.hero(params, body);
-                default: throw new Error('Mock not found: URL: ' + JSON.stringify({ url, params, body }, null, 2));
+                case '/quest': return this.quest(params, body);
+                default: throw new Error('Mock not found: URL: ' + JSON.stringify({ url, method: init?.method, params, body }, null, 2));
             }
         }
         auth(params, body) {
@@ -8528,6 +8692,39 @@ var $;
                 return { name: 'Капитан моль', items: [], skills: [], stats: [] };
             }
             throw new Error('Герой не найден');
+        }
+        quest(params, body) {
+            return [{
+                    id: 'quest-1',
+                    name: 'Прибытие',
+                    description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
+                    status: 'active',
+                    scenes: [{}],
+                }, {
+                    id: 'quest-2',
+                    name: 'Первый бой',
+                    description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
+                    status: 'open',
+                    scenes: []
+                }, {
+                    id: 'quest-3',
+                    name: 'Свой квест',
+                    description: 'Создание первого своего квеста (можно заглушку)',
+                    status: 'closed',
+                    scenes: []
+                }, {
+                    id: 'quest-4',
+                    name: 'Первый бой',
+                    description: 'Найти квест другого человека',
+                    status: 'denied',
+                    scenes: []
+                }, {
+                    id: 'quest-5',
+                    name: 'Первый босс',
+                    description: 'Сложный квест, который можно пройти только с очень прокаченными навыками и предметами и удачей. С первых 2 попыток нельзя пройти.',
+                    status: 'denied',
+                    scenes: []
+                }];
         }
     }
     $.$sib_api = $sib_api;
@@ -8554,6 +8751,9 @@ var $;
         static post(input, body) {
             return this.json(input, { body: JSON.stringify(body), method: 'POST' });
         }
+        static get(input, init) {
+            return this.json(input, { method: 'GET' });
+        }
     }
     $.$sib_fetch = $sib_fetch;
 })($ || ($ = {}));
@@ -8569,7 +8769,6 @@ var $;
     (function ($$) {
         class $sib_hero extends $.$sib_hero {
             static hero(next) {
-                console.log('hero next', next);
                 const user = $sib_app.user();
                 if (user) {
                     if (next === undefined && $mol_state_local.value('hero'))
@@ -8593,20 +8792,6 @@ var $;
         $$.$sib_hero = $sib_hero;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$sib_island) = class $sib_island extends ($.$mol_page) {
-		title(){
-			return "Архипелаг";
-		}
-		body(){
-			return [];
-		}
-	};
-
-
-;
-"use strict";
 
 ;
 	($.$sib_create) = class $sib_create extends ($.$mol_page) {
