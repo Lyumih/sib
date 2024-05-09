@@ -6,16 +6,22 @@ $sib_app $mol_page
 		<= Telegram $mol_link_source
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
-		<= Sources $mol_link_source uri \https://github.com/Lyumih/gen
+		<= Sources $mol_link_source uri \https://github.com/Lyumih/sib
 	body /
 		<= Pages $mol_book2_catalog
-			menu_title \Меню
+			menu_title \Компас
 			param \p
+			- Placeholder null
 			spreads *
 				about <= About_page $mol_page
-					title \О нас
+					title \О мире
+					body /
+						<= About_text $mol_text text \
+							\Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.
+							\Вступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.
+							\Или создавай свои острова, прекрасные как и ты сам!
 				hero_page <= Hero_page $mol_page
-					title \Персонаж
+					title \Зеркало
 					body /
 						<= Hero_name $mol_paragraph title \Капитан Моль
 						<= Item_title $mol_paragraph title \Предметы
@@ -24,4 +30,4 @@ $sib_app $mol_page
 				island <= Island_page $mol_page
 					title \Острава
 				create <= Create_page $mol_page
-					title \Создать
+					title \Вдохновение
