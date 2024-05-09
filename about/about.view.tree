@@ -11,7 +11,12 @@ $sib_about $mol_page
 					name \Логин
 					bid <= name_bid \
 					control <= Login_control $mol_string
-						value? <=> name? \
+						value? <=> name? \capitan
 			buttons /
 				<= Login_submit $mol_button_major
 					title \Войти или зарегистрироваться
+					click? <=> signup? null
+					enabled <= signup_allowed false
+		<= Logout $mol_button_major
+			title \Выйти
+			click? <=> logout? null

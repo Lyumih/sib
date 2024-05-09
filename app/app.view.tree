@@ -8,6 +8,7 @@ $sib_app $mol_page
 			uri \https://t.me/h_y_o_o/4484
 		<= Sources $mol_link_source uri \https://github.com/Lyumih/sib
 	body /
+		<= Auth $sib_about
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
 			param \p
@@ -17,3 +18,4 @@ $sib_app $mol_page
 				hero_page <= Hero_page $sib_hero
 				island_page <= Island_page $sib_island
 				create <= Create_page $sib_create
+				api <= Api $sib_api
