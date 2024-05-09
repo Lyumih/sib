@@ -2,8 +2,6 @@ namespace $.$$ {
 	export class $sib_about extends $.$sib_about {
 
 		signup( next?: any ) {
-			console.log( next )
-			console.log( this.name() )
 			$sib_app.user( { login: this.name() } )
 		}
 

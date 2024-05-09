@@ -1,18 +1,10 @@
 namespace $.$$ {
 	export class $sib_app extends $.$sib_app {
 
-		login() {
-			return 'Login'
-		}
-
 		@$mol_mem
 		static user( next?: any ) {
-			console.log( 'user', next )
-			if( next ) {
-				return $sib_fetch.post( '/auth?123=56', next ) ?? null
-			}
-			console.log( 'after fetch' )
-			return next ?? null
+			if( next === undefined ) return $mol_state_local.value( 'user' )
+			return $mol_state_local.value( 'user', next === null ? null : $sib_fetch.post( '/auth', next ) )
 		}
 
 		body(): readonly any[] {
