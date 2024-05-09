@@ -37,67 +37,6 @@ $mol_page $mol_view
 $mol_theme_auto $mol_plugin
 	attr * mol_theme <= theme \
 
-$mol_svg $mol_view
-	dom_name \svg
-	dom_name_space \http://www.w3.org/2000/svg
-	font_size 16
-	font_family \
-	style_size *
-
-$mol_svg_root $mol_svg
-	dom_name \svg
-	attr *
-		^
-		viewBox <= view_box \0 0 100 100
-		preserveAspectRatio <= aspect \xMidYMid
-
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_icon $mol_svg_root
-	view_box \0 0 24 24
-	minimal_width 16
-	minimal_height 16
-	sub /
-		<= Path $mol_svg_path
-			geometry <= path \
-
-$mol_icon_telegram $mol_icon path \M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z
-
-$mol_link $mol_view
-	uri \
-	dom_name \a
-	uri_off \
-	uri_native null
-	external false
-	attr *
-		^
-		href <= uri_toggle \
-		title <= hint_safe <= hint \
-		target <= target \_self
-		download <= file_name \
-		mol_link_current <= current false
-		rel <= relation \
-	sub /$mol_view_content
-		<= title
-	arg *
-	event *
-		^
-		click?event <=> click?event <=> event_click?event null
-
-$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
-
-$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
-
-$mol_link_source $mol_link
-	hint @ \Source code
-	sub /
-		<= Icon $mol_icon_script_text
-
 $mol_list $mol_view
 	render_visible_only true
 	render_over 0
@@ -196,6 +135,35 @@ $mol_button_typed $mol_button
 	minimal_width 40
 
 $mol_button_minor $mol_button_typed
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
 
 $mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
 
@@ -319,6 +287,27 @@ $mol_grid_cell $mol_view
 	minimal_height 40
 
 $mol_grid_number $mol_grid_cell
+
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click?event <=> click?event <=> event_click?event null
 
 $mol_image $mol_view
 	dom_name \img
@@ -503,6 +492,17 @@ $mol_text_span $mol_paragraph
 		^
 		mol_text_type <= type \
 
+$mol_icon_telegram $mol_icon path \M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z
+
+$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
+
+$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
+
+$mol_link_source $mol_link
+	hint @ \Source code
+	sub /
+		<= Icon $mol_icon_script_text
+
 $mol_hotkey $mol_plugin
 	event *
 		^
@@ -581,20 +581,6 @@ $mol_form $mol_list
 			sub <= body <= form_fields /$mol_form_field
 		<= Foot $mol_row
 			sub <= foot <= buttons /$mol_view
-
-$mol_text_list $mol_text
-	auto_scroll null
-	attr *
-		^
-		mol_text_list_type <= type \
-	Paragraph* $mol_text_list_item
-		index <= item_index*
-		sub <= block_content*
-
-$mol_text_list_item $mol_paragraph
-	attr *
-		^
-		mol_text_list_item_index <= index 0
 
 $sib_about $mol_page
 	title \О мире
@@ -778,11 +764,26 @@ $mol_book2_catalog $mol_book2
 		sub /
 			<= Spread_close_icon $mol_icon_close
 
+$mol_text_list $mol_text
+	auto_scroll null
+	attr *
+		^
+		mol_text_list_type <= type \
+	Paragraph* $mol_text_list_item
+		index <= item_index*
+		sub <= block_content*
+
+$mol_text_list_item $mol_paragraph
+	attr *
+		^
+		mol_text_list_item_index <= index 0
+
 $sib_app $mol_page
 	title \Энтропия - альтернативный мир
 	plugins /
 		<= Theme $mol_theme_auto theme \$mol_theme_light
 	tools /
+		<= Hero_name $mol_text text <= hero_name \
 		<= Telegram $mol_link_source
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
@@ -798,4 +799,3 @@ $sib_app $mol_page
 				hero_page <= Hero_page $sib_hero
 				island_page <= Island_page $sib_island
 				create <= Create_page $sib_create
-				- api <= Api $sib_api
