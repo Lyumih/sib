@@ -1,0 +1,17 @@
+$sib_about $mol_page
+	title \О мире
+	body /
+		<= About_text $mol_text text \
+			\Энтропия - альтернативный мир, наполненный архипелагами островов с неведомыми тропами.
+			\Вступай на неизведанный путь, возьми волшебные предметы и разгадай скрытые тайны.
+			\Или создавай свои острова, прекрасные как и ты сам!
+		<= Login $mol_form
+			form_fields /
+				<= Login_field $mol_form_field
+					name \Логин
+					bid <= name_bid \
+					control <= Login_control $mol_string
+						value? <=> name? \
+			buttons /
+				<= Login_submit $mol_button_major
+					title \Войти или зарегистрироваться

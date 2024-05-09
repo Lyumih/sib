@@ -10,25 +10,10 @@ $sib_app $mol_page
 	body /
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
-			- Placeholder null
 			param \p
 			spreads *
-				hero_page <= Hero_page $mol_page
-					title \Зеркало
-					body /
-						<= Hero_name $mol_paragraph title \Капитан Моль
-						<= Item_title $mol_paragraph title \Предметы
-						<= Skill_title $mol_paragraph title \Умения
-						<= Stats_title $mol_paragraph title \Статистика
-				island <= Island_page $mol_page
-					title \Острова
-				create <= Create_page $mol_page
-					title \Вдохновение
 				\
-					<= About_page $mol_page
-						title \О мире
-						body /
-							<= About_text $mol_text text \
-								\Энтропия - альтернативный мир, наполненный архипелагами островов с неведомыми тропами.
-								\Вступай на неизведанный путь, возьми волшебные предметы и разгадай скрытые тайны.
-								\Или создавай свои острова, прекрасные как и ты сам!
+					<= About_page $sib_about
+				hero_page <= Hero_page $sib_hero
+				island_page <= Island_page $sib_island
+				create <= Create_page $sib_create

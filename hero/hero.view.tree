@@ -1,0 +1,7 @@
+$sib_hero $mol_page
+	title \Зеркало
+	body /
+		<= Hero_name $mol_paragraph title \Капитан Моль
+		<= Item_title $mol_paragraph title \Предметы
+		<= Skill_title $mol_paragraph title \Умения
+		<= Stats_title $mol_paragraph title \Статистика
