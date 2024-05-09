@@ -1,4 +1,0 @@
-- $mol_page_json возвращало бы не стандартный html, a aplication-json
-- $sib_api $mol_page_json
-$sib_api $mol_page
-	body /
