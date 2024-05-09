@@ -3,6 +3,7 @@ $sib_app $mol_page
 	plugins /
 		<= Theme $mol_theme_auto theme \$mol_theme_light
 	tools /
+		<= Hero_name $mol_text text <= hero_name \
 		<= Telegram $mol_link_source
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
@@ -18,4 +19,3 @@ $sib_app $mol_page
 				hero_page <= Hero_page $sib_hero
 				island_page <= Island_page $sib_island
 				create <= Create_page $sib_create
-				- api <= Api $sib_api
