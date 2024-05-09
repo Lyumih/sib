@@ -635,11 +635,6 @@ $sib_create $mol_page
 	title \Вдохновение
 	body /
 
-- $mol_page_json возвращало бы не стандартный html, a aplication-json
-- $sib_api $mol_page_json
-$sib_api $mol_page
-	body /
-
 $mol_book2 $mol_scroll
 	menu_title \
 	sub <= pages /$mol_view
@@ -791,4 +786,4 @@ $sib_app $mol_page
 				hero_page <= Hero_page $sib_hero
 				island_page <= Island_page $sib_island
 				create <= Create_page $sib_create
-				api <= Api $sib_api
+				- api <= Api $sib_api

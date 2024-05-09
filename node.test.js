@@ -8988,43 +8988,6 @@ var $;
 "use strict";
 
 ;
-	($.$sib_api) = class $sib_api extends ($.$mol_page) {
-		body(){
-			return [];
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $sib_api extends $.$sib_api {
-            url() {
-                return $mol_state_arg.value('url');
-            }
-            json_response() {
-                if (this.url() === 'api/auth/user?name=capitan') {
-                    return {
-                        login: 'capitan',
-                        name: 'Капитан',
-                    };
-                }
-                else {
-                    throw new Error('Not found');
-                }
-            }
-        }
-        $$.$sib_api = $sib_api;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
 		pages(){
 			return [];
@@ -9982,10 +9945,6 @@ var $;
 			const obj = new this.$.$sib_create();
 			return obj;
 		}
-		Api(){
-			const obj = new this.$.$sib_api();
-			return obj;
-		}
 		Pages(){
 			const obj = new this.$.$mol_book2_catalog();
 			(obj.menu_title) = () => ("Компас");
@@ -9994,8 +9953,7 @@ var $;
 				"": (this.About_page()), 
 				"hero_page": (this.Hero_page()), 
 				"island_page": (this.Island_page()), 
-				"create": (this.Create_page()), 
-				"api": (this.Api())
+				"create": (this.Create_page())
 			});
 			return obj;
 		}
@@ -10021,7 +9979,6 @@ var $;
 	($mol_mem(($.$sib_app.prototype), "Hero_page"));
 	($mol_mem(($.$sib_app.prototype), "Island_page"));
 	($mol_mem(($.$sib_app.prototype), "Create_page"));
-	($mol_mem(($.$sib_app.prototype), "Api"));
 	($mol_mem(($.$sib_app.prototype), "Pages"));
 
 
@@ -10193,6 +10150,60 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $sib_api extends $mol_fetch {
+        json(input, init) {
+            return this.json_response(input, init);
+        }
+        json_response(input, init) {
+            const [url, params] = input.toString().split('?');
+            const body = JSON.parse(String(init?.body || {}));
+            console.log('MOCK REQUEST:', url, body, params);
+            if (url === '/auth') {
+                return this.auth(params, body);
+            }
+            else {
+                throw new Error('Mock not found: URL: ' + JSON.stringify({ url, params, body }, null, 2));
+            }
+        }
+        auth(params, body) {
+            if (body.login === 'capitan') {
+                return { login: 'capitan', name: 'Капитан моль' };
+            }
+            throw new Error('Пользователь не найден');
+        }
+    }
+    $.$sib_api = $sib_api;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $sib_fetch extends $mol_fetch {
+        static is_mock() {
+            return true;
+        }
+        static mock() {
+            return new $sib_api;
+        }
+        static base_url() {
+            return 'https://lyumih.github.io/sib/api';
+        }
+        static json(url, init) {
+            const input = this.is_mock() ? url : this.base_url() + url;
+            return this.is_mock() ? this.mock().json(input, init) : super.json(input, init);
+        }
+        static post(input, body) {
+            return this.json(input, { body: JSON.stringify(body), method: 'POST' });
+        }
+    }
+    $.$sib_fetch = $sib_fetch;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -10206,10 +10217,8 @@ var $;
             }
             static user(next) {
                 console.log('user', next);
-                return next ?? null;
                 if (next) {
-                    console.log('fetch user');
-                    $mol_fetch.json('/api/auth');
+                    return $sib_fetch.post('/auth?123=56', next) ?? null;
                 }
                 console.log('after fetch');
                 return next ?? null;
