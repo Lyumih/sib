@@ -14,7 +14,7 @@ $sib_about $mol_page
 						value? <=> name? \capitan
 			buttons /
 				<= Login_submit $mol_button_major
-					title \Войти или зарегистрироваться
+					title \Войти
 					click? <=> signup? null
 					enabled <= signup_allowed false
 		<= Logout $mol_button_major

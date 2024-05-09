@@ -19,7 +19,11 @@ namespace $ {
 		}
 
 		static post<T, B>( input: RequestInfo, body?: B ) {
-			return this.json( input, { body: JSON.stringify(body), method: 'POST' } ) as T | undefined
+			return this.json( input, { body: JSON.stringify( body ), method: 'POST' } ) as T | undefined
+		}
+
+		static get<T>( input: RequestInfo, init?: RequestInit ) {
+			return this.json( input, { method: 'GET' } ) as T | undefined
 		}
 	}
 }

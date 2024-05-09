@@ -8,10 +8,8 @@ namespace $.$$ {
 	}
 	export class $sib_hero extends $.$sib_hero {
 
-		
 		@$mol_mem
 		static hero( next?: HeroProps | null ) {
-			console.log( 'hero next', next )
 			const user = $sib_app.user()
 			if( user ) {
 				if( next === undefined && $mol_state_local.value<Hero>( 'hero' ) ) return $mol_state_local.value<Hero>( 'hero' )
