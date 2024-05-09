@@ -1,0 +1,24 @@
+$sib_app $mol_page
+	title \Энтропия - альтернативный мир
+	plugins /
+		<= Theme $mol_theme_auto theme \$mol_theme_light
+	tools /
+		<= Telegram $mol_link_source
+			Icon <= Telegram_icon $mol_icon_telegram
+			uri \https://t.me/h_y_o_o/4484
+		<= Sources $mol_link_source uri \https://github.com/Lyumih/gen
+	body /
+		<= Pages $mol_book2_catalog
+			menu_title \Меню
+			param \p
+			spreads *
+				about <= About_page $mol_page
+					title \О нас
+				hero_page <= Hero_page $mol_page
+					title \Персонаж
+					body /
+						<= Hero_name $mol_paragraph title \Капитан Моль
+				island <= Island_page $mol_page
+					title \Острава
+				create <= Create_page $mol_page
+					title \Создать
