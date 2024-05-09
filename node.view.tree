@@ -98,6 +98,13 @@ $mol_link_source $mol_link
 	sub /
 		<= Icon $mol_icon_script_text
 
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
 $mol_list $mol_view
 	render_visible_only true
 	render_over 0
@@ -108,13 +115,6 @@ $mol_list $mol_view
 	view_window /
 		0
 		0
-
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
 
 $mol_stack $mol_view
 
@@ -703,16 +703,9 @@ $sib_app $mol_page
 	body /
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
-			param \p
 			- Placeholder null
+			param \p
 			spreads *
-				about <= About_page $mol_page
-					title \О мире
-					body /
-						<= About_text $mol_text text \
-							\Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.
-							\Вступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.
-							\Или создавай свои острова, прекрасные как и ты сам!
 				hero_page <= Hero_page $mol_page
 					title \Зеркало
 					body /
@@ -721,6 +714,14 @@ $sib_app $mol_page
 						<= Skill_title $mol_paragraph title \Умения
 						<= Stats_title $mol_paragraph title \Статистика
 				island <= Island_page $mol_page
-					title \Острава
+					title \Острова
 				create <= Create_page $mol_page
 					title \Вдохновение
+				\
+					<= About_page $mol_page
+						title \О мире
+						body /
+							<= About_text $mol_text text \
+								\Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.
+								\Вступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.
+								\Или создавай свои острова, прекрасные как и ты сам!

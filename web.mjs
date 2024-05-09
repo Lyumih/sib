@@ -32,41 +32,6 @@ $.$$ = $
 "use strict";
 var $;
 (function ($) {
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_dom_context = self;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_style_attach(id, text) {
-        const doc = $mol_dom_context.document;
-        if (!doc)
-            return null;
-        const elid = `$mol_style_attach:${id}`;
-        let el = doc.getElementById(elid);
-        if (!el) {
-            el = doc.createElement('style');
-            el.id = elid;
-            doc.head.appendChild(el);
-        }
-        if (el.innerHTML != text)
-            el.innerHTML = text;
-        return el;
-    }
-    $.$mol_style_attach = $mol_style_attach;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     $.$mol_ambient_ref = Symbol('$mol_ambient_ref');
     function $mol_ambient(overrides) {
         return Object.setPrototypeOf(overrides, this || $);
@@ -1551,6 +1516,19 @@ var $;
 "use strict";
 var $;
 (function ($) {
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_dom_context = self;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_view_selection extends $mol_object {
         static focused(next, notify) {
             const parents = [];
@@ -1893,6 +1871,28 @@ var $;
 
 ;
 "use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_style_attach(id, text) {
+        const doc = $mol_dom_context.document;
+        if (!doc)
+            return null;
+        const elid = `$mol_style_attach:${id}`;
+        let el = doc.getElementById(elid);
+        if (!el) {
+            el = doc.createElement('style');
+            el.id = elid;
+            doc.head.appendChild(el);
+        }
+        if (el.innerHTML != text)
+            el.innerHTML = text;
+        return el;
+    }
+    $.$mol_style_attach = $mol_style_attach;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -4351,6 +4351,84 @@ var $;
 "use strict";
 
 ;
+	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
+		line_height(){
+			return 24;
+		}
+		letter_width(){
+			return 7;
+		}
+		width_limit(){
+			return +Infinity;
+		}
+		row_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paragraph extends $.$mol_paragraph {
+            maximal_width() {
+                let width = 0;
+                const letter = this.letter_width();
+                for (const kid of this.sub()) {
+                    if (!kid)
+                        continue;
+                    if (kid instanceof $mol_view) {
+                        width += kid.maximal_width();
+                    }
+                    else if (typeof kid !== 'object') {
+                        width += String(kid).length * letter;
+                    }
+                }
+                return width;
+            }
+            width_limit() {
+                return this.$.$mol_window.size().width;
+            }
+            minimal_width() {
+                return this.letter_width();
+            }
+            row_width() {
+                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
+            }
+            minimal_height() {
+                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "maximal_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "row_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "minimal_height", null);
+        $$.$mol_paragraph = $mol_paragraph;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_list) = class $mol_list extends ($.$mol_view) {
 		rows(){
 			return [];
@@ -4544,84 +4622,6 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
-		line_height(){
-			return 24;
-		}
-		letter_width(){
-			return 7;
-		}
-		width_limit(){
-			return +Infinity;
-		}
-		row_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_paragraph extends $.$mol_paragraph {
-            maximal_width() {
-                let width = 0;
-                const letter = this.letter_width();
-                for (const kid of this.sub()) {
-                    if (!kid)
-                        continue;
-                    if (kid instanceof $mol_view) {
-                        width += kid.maximal_width();
-                    }
-                    else if (typeof kid !== 'object') {
-                        width += String(kid).length * letter;
-                    }
-                }
-                return width;
-            }
-            width_limit() {
-                return this.$.$mol_window.size().width;
-            }
-            minimal_width() {
-                return this.letter_width();
-            }
-            row_width() {
-                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
-            }
-            minimal_height() {
-                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "maximal_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "row_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "minimal_height", null);
-        $$.$mol_paragraph = $mol_paragraph;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -9068,17 +9068,6 @@ var $;
 			(obj.uri) = () => ("https://github.com/Lyumih/sib");
 			return obj;
 		}
-		About_text(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ("Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.\nВступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.\nИли создавай свои острова, прекрасные как и ты сам!");
-			return obj;
-		}
-		About_page(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("О мире");
-			(obj.body) = () => ([(this.About_text())]);
-			return obj;
-		}
 		Hero_name(){
 			const obj = new this.$.$mol_paragraph();
 			(obj.title) = () => ("Капитан Моль");
@@ -9112,7 +9101,7 @@ var $;
 		}
 		Island_page(){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Острава");
+			(obj.title) = () => ("Острова");
 			return obj;
 		}
 		Create_page(){
@@ -9120,15 +9109,26 @@ var $;
 			(obj.title) = () => ("Вдохновение");
 			return obj;
 		}
+		About_text(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ("Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.\nВступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.\nИли создавай свои острова, прекрасные как и ты сам!");
+			return obj;
+		}
+		About_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("О мире");
+			(obj.body) = () => ([(this.About_text())]);
+			return obj;
+		}
 		Pages(){
 			const obj = new this.$.$mol_book2_catalog();
 			(obj.menu_title) = () => ("Компас");
 			(obj.param) = () => ("p");
 			(obj.spreads) = () => ({
-				"about": (this.About_page()), 
 				"hero_page": (this.Hero_page()), 
 				"island": (this.Island_page()), 
-				"create": (this.Create_page())
+				"create": (this.Create_page()), 
+				"": (this.About_page())
 			});
 			return obj;
 		}
@@ -9149,8 +9149,6 @@ var $;
 	($mol_mem(($.$sib_app.prototype), "Telegram_icon"));
 	($mol_mem(($.$sib_app.prototype), "Telegram"));
 	($mol_mem(($.$sib_app.prototype), "Sources"));
-	($mol_mem(($.$sib_app.prototype), "About_text"));
-	($mol_mem(($.$sib_app.prototype), "About_page"));
 	($mol_mem(($.$sib_app.prototype), "Hero_name"));
 	($mol_mem(($.$sib_app.prototype), "Item_title"));
 	($mol_mem(($.$sib_app.prototype), "Skill_title"));
@@ -9158,18 +9156,32 @@ var $;
 	($mol_mem(($.$sib_app.prototype), "Hero_page"));
 	($mol_mem(($.$sib_app.prototype), "Island_page"));
 	($mol_mem(($.$sib_app.prototype), "Create_page"));
+	($mol_mem(($.$sib_app.prototype), "About_text"));
+	($mol_mem(($.$sib_app.prototype), "About_page"));
 	($mol_mem(($.$sib_app.prototype), "Pages"));
 
 
 ;
 "use strict";
+
+;
+"use strict";
 var $;
 (function ($) {
-    $mol_style_attach("sib/app/app.view.css", "[sib_app_body_content] {\n\theight: 100%;\n}\n");
+    var $$;
+    (function ($$) {
+        class $sib_app extends $.$sib_app {
+        }
+        $$.$sib_app = $sib_app;
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
 "use strict";
+var $;
+(function ($) {
+    $mol_style_attach("sib/app/app.view.css", "[sib_app]{\n\tfont-family: monospace;\n}\n\n[sib_app_body_content] {\n\theight: 100%;\n}\n");
+})($ || ($ = {}));
 
 
 export default $
