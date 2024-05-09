@@ -10,16 +10,9 @@ $sib_app $mol_page
 	body /
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
-			param \p
 			- Placeholder null
+			param \p
 			spreads *
-				about <= About_page $mol_page
-					title \О мире
-					body /
-						<= About_text $mol_text text \
-							\Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.
-							\Вступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.
-							\Или создавай свои острова, прекрасные как и ты сам!
 				hero_page <= Hero_page $mol_page
 					title \Зеркало
 					body /
@@ -28,6 +21,14 @@ $sib_app $mol_page
 						<= Skill_title $mol_paragraph title \Умения
 						<= Stats_title $mol_paragraph title \Статистика
 				island <= Island_page $mol_page
-					title \Острава
+					title \Острова
 				create <= Create_page $mol_page
 					title \Вдохновение
+				\
+					<= About_page $mol_page
+						title \О мире
+						body /
+							<= About_text $mol_text text \
+								\Энтропия - альтернативный мир, наполненный архипелагами островов с невдомыми тропами.
+								\Вступай на неизведомый путь, возьми волшебные придметы и разагадай скрытые тайны.
+								\Или создавай свои острова, прекрасные как и ты сам!
