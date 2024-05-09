@@ -8457,9 +8457,13 @@ var $;
 
 ;
 	($.$sib_hero) = class $sib_hero extends ($.$mol_page) {
+		hero_name(){
+			return "";
+		}
 		Hero_name(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("Капитан Моль");
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Имя");
+			(obj.content) = () => ([(this.hero_name())]);
 			return obj;
 		}
 		Item_title(){
@@ -8497,6 +8501,98 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $sib_api extends $mol_fetch {
+        json(input, init) {
+            return this.json_response(input, init);
+        }
+        json_response(input, init) {
+            const [url, params] = input.toString().split('?');
+            const body = JSON.parse(String(init?.body || {}));
+            console.log('MOCK REQUEST:', url, body, params);
+            switch (url) {
+                case '/auth': return this.auth(params, body);
+                case '/hero': return this.hero(params, body);
+                default: throw new Error('Mock not found: URL: ' + JSON.stringify({ url, params, body }, null, 2));
+            }
+        }
+        auth(params, body) {
+            if (body.login === 'capitan') {
+                return { login: 'capitan', name: 'Капитан моль' };
+            }
+            throw new Error('Пользователь не найден');
+        }
+        hero(params, body) {
+            if (body.login === 'capitan') {
+                return { name: 'Капитан моль', items: [], skills: [], stats: [] };
+            }
+            throw new Error('Герой не найден');
+        }
+    }
+    $.$sib_api = $sib_api;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $sib_fetch extends $mol_fetch {
+        static is_mock() {
+            return true;
+        }
+        static mock() {
+            return new $sib_api;
+        }
+        static base_url() {
+            return 'https://lyumih.github.io/sib/api';
+        }
+        static json(url, init) {
+            const input = this.is_mock() ? url : this.base_url() + url;
+            return this.is_mock() ? this.mock().json(input, init) : super.json(input, init);
+        }
+        static post(input, body) {
+            return this.json(input, { body: JSON.stringify(body), method: 'POST' });
+        }
+    }
+    $.$sib_fetch = $sib_fetch;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $sib_hero extends $.$sib_hero {
+            static hero(next) {
+                console.log('hero next', next);
+                const user = $sib_app.user();
+                if (user) {
+                    if (next === undefined && $mol_state_local.value('hero'))
+                        return $mol_state_local.value('hero');
+                    return $mol_state_local.value('hero', next === null ? null : $sib_fetch.post('/hero', user));
+                }
+            }
+            hero(next) {
+                return $sib_hero.hero();
+            }
+            hero_name() {
+                return this.hero()?.name || 'no name';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "hero", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero, "hero", null);
+        $$.$sib_hero = $sib_hero;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$sib_island) = class $sib_island extends ($.$mol_page) {
@@ -9520,60 +9616,6 @@ var $;
 	($mol_mem(($.$sib_app.prototype), "Create_page"));
 	($mol_mem(($.$sib_app.prototype), "Pages"));
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $sib_api extends $mol_fetch {
-        json(input, init) {
-            return this.json_response(input, init);
-        }
-        json_response(input, init) {
-            const [url, params] = input.toString().split('?');
-            const body = JSON.parse(String(init?.body || {}));
-            console.log('MOCK REQUEST:', url, body, params);
-            if (url === '/auth') {
-                return this.auth(params, body);
-            }
-            else {
-                throw new Error('Mock not found: URL: ' + JSON.stringify({ url, params, body }, null, 2));
-            }
-        }
-        auth(params, body) {
-            if (body.login === 'capitan') {
-                return { login: 'capitan', name: 'Капитан моль' };
-            }
-            throw new Error('Пользователь не найден');
-        }
-    }
-    $.$sib_api = $sib_api;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $sib_fetch extends $mol_fetch {
-        static is_mock() {
-            return true;
-        }
-        static mock() {
-            return new $sib_api;
-        }
-        static base_url() {
-            return 'https://lyumih.github.io/sib/api';
-        }
-        static json(url, init) {
-            const input = this.is_mock() ? url : this.base_url() + url;
-            return this.is_mock() ? this.mock().json(input, init) : super.json(input, init);
-        }
-        static post(input, body) {
-            return this.json(input, { body: JSON.stringify(body), method: 'POST' });
-        }
-    }
-    $.$sib_fetch = $sib_fetch;
-})($ || ($ = {}));
 
 ;
 "use strict";

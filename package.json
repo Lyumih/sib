@@ -203,6 +203,10 @@
     "$mol_labeler",
     "$mol_button_major",
     "$sib_hero",
+    "$sib_fetch",
+    "$mol_fetch",
+    "$mol_dom_parse",
+    "$sib_api",
     "$sib_island",
     "$sib_create",
     "$mol_book2_catalog",
@@ -211,11 +215,7 @@
     "$mol_pop",
     "$mol_nav",
     "$mol_icon_close",
-    "$mol_match",
-    "$sib_fetch",
-    "$mol_fetch",
-    "$mol_dom_parse",
-    "$sib_api"
+    "$mol_match"
   ],
   "dependencies": {
     "jsdom": "*",
