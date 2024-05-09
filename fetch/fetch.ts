@@ -18,8 +18,8 @@ namespace $ {
 			return this.is_mock() ? this.mock().json( input, init ) : super.json( input, init )
 		}
 
-		static post( input: RequestInfo, body?: unknown ) {
-			return this.json( input, { body: JSON.stringify(body), method: 'POST' } )
+		static post<T, B>( input: RequestInfo, body?: B ) {
+			return this.json( input, { body: JSON.stringify(body), method: 'POST' } ) as T | undefined
 		}
 	}
 }

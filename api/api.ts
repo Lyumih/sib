@@ -9,10 +9,10 @@ namespace $ {
 			const [url, params] = input.toString().split( '?' )
 			const body = JSON.parse( String( init?.body || {} ) )
 			console.log( 'MOCK REQUEST:', url, body, params )
-			if( url === '/auth' ) {
-				return this.auth( params, body )
-			} else {
-				throw new Error( 'Mock not found: URL: ' + JSON.stringify( { url, params, body }, null, 2 ) )
+			switch( url ) {
+				case '/auth': return this.auth( params, body )
+				case '/hero': return this.hero( params, body )
+				default: throw new Error( 'Mock not found: URL: ' + JSON.stringify( { url, params, body }, null, 2 ) )
 			}
 		}
 
@@ -21,6 +21,13 @@ namespace $ {
 				return { login: 'capitan', name: 'Капитан моль' }
 			}
 			throw new Error( 'Пользователь не найден' )
+		}
+
+		hero( params: any, body: any ) {
+			if( body.login === 'capitan' ) {
+				return { name: 'Капитан моль', items: [], skills: [], stats: [] }
+			}
+			throw new Error( 'Герой не найден' )
 		}
 
 	}

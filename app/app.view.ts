@@ -1,10 +1,15 @@
 namespace $.$$ {
+
+	
+	type UserProps = { login: string }
+	type User = { login: string, name: string }
+
 	export class $sib_app extends $.$sib_app {
 
 		@$mol_mem
-		static user( next?: any ) {
+		static user( next?: UserProps | null ) : User | null  {
 			if( next === undefined ) return $mol_state_local.value( 'user' )
-			return $mol_state_local.value( 'user', next === null ? null : $sib_fetch.post( '/auth', next ) )
+			return $mol_state_local.value<User>( 'user', next === null ? null : $sib_fetch.post<User, UserProps>( '/auth', next ) )
 		}
 
 		body(): readonly any[] {
