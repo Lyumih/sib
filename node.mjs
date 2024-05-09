@@ -8780,58 +8780,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$sib_about) = class $sib_about extends ($.$mol_page) {
-		About_text(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ("Энтропия - альтернативный мир, наполненный архипелагами островов с неведомыми тропами.\nВступай на неизведанный путь, возьми волшебные предметы и разгадай скрытые тайны.\nИли создавай свои острова, прекрасные как и ты сам!");
-			return obj;
-		}
-		name_bid(){
-			return "";
-		}
-		name(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Login_control(){
-			const obj = new this.$.$mol_string();
-			(obj.value) = (next) => ((this.name(next)));
-			return obj;
-		}
-		Login_field(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Логин");
-			(obj.bid) = () => ((this.name_bid()));
-			(obj.control) = () => ((this.Login_control()));
-			return obj;
-		}
-		Login_submit(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Войти или зарегистрироваться");
-			return obj;
-		}
-		Login(){
-			const obj = new this.$.$mol_form();
-			(obj.form_fields) = () => ([(this.Login_field())]);
-			(obj.buttons) = () => ([(this.Login_submit())]);
-			return obj;
-		}
-		title(){
-			return "О мире";
-		}
-		body(){
-			return [(this.About_text()), (this.Login())];
-		}
-	};
-	($mol_mem(($.$sib_about.prototype), "About_text"));
-	($mol_mem(($.$sib_about.prototype), "name"));
-	($mol_mem(($.$sib_about.prototype), "Login_control"));
-	($mol_mem(($.$sib_about.prototype), "Login_field"));
-	($mol_mem(($.$sib_about.prototype), "Login_submit"));
-	($mol_mem(($.$sib_about.prototype), "Login"));
-
-
-;
 	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
 		type(){
 			return "";
@@ -8871,7 +8819,111 @@ var $;
 "use strict";
 
 ;
+	($.$sib_about) = class $sib_about extends ($.$mol_page) {
+		About_text(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ("Энтропия - альтернативный мир, наполненный архипелагами островов с неведомыми тропами.\nВступай на неизведанный путь, возьми волшебные предметы и разгадай скрытые тайны.\nИли создавай свои острова, прекрасные как и ты сам!");
+			return obj;
+		}
+		name_bid(){
+			return "";
+		}
+		name(next){
+			if(next !== undefined) return next;
+			return "capitan";
+		}
+		Login_control(){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.name(next)));
+			return obj;
+		}
+		Login_field(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Логин");
+			(obj.bid) = () => ((this.name_bid()));
+			(obj.control) = () => ((this.Login_control()));
+			return obj;
+		}
+		signup(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		signup_allowed(){
+			return false;
+		}
+		Login_submit(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Войти или зарегистрироваться");
+			(obj.click) = (next) => ((this.signup(next)));
+			(obj.enabled) = () => ((this.signup_allowed()));
+			return obj;
+		}
+		Login(){
+			const obj = new this.$.$mol_form();
+			(obj.form_fields) = () => ([(this.Login_field())]);
+			(obj.buttons) = () => ([(this.Login_submit())]);
+			return obj;
+		}
+		logout(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Logout(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Выйти");
+			(obj.click) = (next) => ((this.logout(next)));
+			return obj;
+		}
+		title(){
+			return "О мире";
+		}
+		body(){
+			return [
+				(this.About_text()), 
+				(this.Login()), 
+				(this.Logout())
+			];
+		}
+	};
+	($mol_mem(($.$sib_about.prototype), "About_text"));
+	($mol_mem(($.$sib_about.prototype), "name"));
+	($mol_mem(($.$sib_about.prototype), "Login_control"));
+	($mol_mem(($.$sib_about.prototype), "Login_field"));
+	($mol_mem(($.$sib_about.prototype), "signup"));
+	($mol_mem(($.$sib_about.prototype), "Login_submit"));
+	($mol_mem(($.$sib_about.prototype), "Login"));
+	($mol_mem(($.$sib_about.prototype), "logout"));
+	($mol_mem(($.$sib_about.prototype), "Logout"));
+
+
+;
 "use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $sib_about extends $.$sib_about {
+            signup(next) {
+                console.log(next);
+                console.log(this.name());
+                $sib_app.user({ login: this.name() });
+            }
+            signup_allowed() {
+                return this.name().length > 3;
+            }
+            logout(next) {
+                $sib_app.user(null);
+            }
+            body() {
+                return [this.About_text(), $sib_app.user() ? this.Logout() : this.Login()];
+            }
+        }
+        $$.$sib_about = $sib_about;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$sib_hero) = class $sib_hero extends ($.$mol_page) {
@@ -8943,6 +8995,43 @@ var $;
 
 ;
 "use strict";
+
+;
+	($.$sib_api) = class $sib_api extends ($.$mol_page) {
+		body(){
+			return [];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $sib_api extends $.$sib_api {
+            url() {
+                return $mol_state_arg.value('url');
+            }
+            json_response() {
+                if (this.url() === 'api/auth/user?name=capitan') {
+                    return {
+                        login: 'capitan',
+                        name: 'Капитан',
+                    };
+                }
+                else {
+                    throw new Error('Not found');
+                }
+            }
+        }
+        $$.$sib_api = $sib_api;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
@@ -9882,6 +9971,10 @@ var $;
 			(obj.uri) = () => ("https://github.com/Lyumih/sib");
 			return obj;
 		}
+		Auth(){
+			const obj = new this.$.$sib_about();
+			return obj;
+		}
 		About_page(){
 			const obj = new this.$.$sib_about();
 			return obj;
@@ -9898,6 +9991,10 @@ var $;
 			const obj = new this.$.$sib_create();
 			return obj;
 		}
+		Api(){
+			const obj = new this.$.$sib_api();
+			return obj;
+		}
 		Pages(){
 			const obj = new this.$.$mol_book2_catalog();
 			(obj.menu_title) = () => ("Компас");
@@ -9906,7 +10003,8 @@ var $;
 				"": (this.About_page()), 
 				"hero_page": (this.Hero_page()), 
 				"island_page": (this.Island_page()), 
-				"create": (this.Create_page())
+				"create": (this.Create_page()), 
+				"api": (this.Api())
 			});
 			return obj;
 		}
@@ -9920,19 +10018,187 @@ var $;
 			return [(this.Telegram()), (this.Sources())];
 		}
 		body(){
-			return [(this.Pages())];
+			return [(this.Auth()), (this.Pages())];
 		}
 	};
 	($mol_mem(($.$sib_app.prototype), "Theme"));
 	($mol_mem(($.$sib_app.prototype), "Telegram_icon"));
 	($mol_mem(($.$sib_app.prototype), "Telegram"));
 	($mol_mem(($.$sib_app.prototype), "Sources"));
+	($mol_mem(($.$sib_app.prototype), "Auth"));
 	($mol_mem(($.$sib_app.prototype), "About_page"));
 	($mol_mem(($.$sib_app.prototype), "Hero_page"));
 	($mol_mem(($.$sib_app.prototype), "Island_page"));
 	($mol_mem(($.$sib_app.prototype), "Create_page"));
+	($mol_mem(($.$sib_app.prototype), "Api"));
 	($mol_mem(($.$sib_app.prototype), "Pages"));
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_dom_parse(text, type = 'application/xhtml+xml') {
+        const parser = new $mol_dom_context.DOMParser();
+        const doc = parser.parseFromString(text, type);
+        const error = doc.getElementsByTagName('parsererror');
+        if (error.length)
+            throw new Error(error[0].textContent);
+        return doc;
+    }
+    $.$mol_dom_parse = $mol_dom_parse;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_fetch_response extends $mol_object2 {
+        native;
+        constructor(native) {
+            super();
+            this.native = native;
+        }
+        status() {
+            const types = ['unknown', 'inform', 'success', 'redirect', 'wrong', 'failed'];
+            return types[Math.floor(this.native.status / 100)];
+        }
+        code() {
+            return this.native.status;
+        }
+        message() {
+            return this.native.statusText || `HTTP Error ${this.code()}`;
+        }
+        headers() {
+            return this.native.headers;
+        }
+        mime() {
+            return this.headers().get('content-type');
+        }
+        stream() {
+            return this.native.body;
+        }
+        text() {
+            const buffer = this.buffer();
+            const native = this.native;
+            const mime = native.headers.get('content-type') || '';
+            const [, charset] = /charset=(.*)/.exec(mime) || [, 'utf-8'];
+            const decoder = new TextDecoder(charset);
+            return decoder.decode(buffer);
+        }
+        json() {
+            return $mol_wire_sync(this.native).json();
+        }
+        buffer() {
+            return $mol_wire_sync(this.native).arrayBuffer();
+        }
+        xml() {
+            return $mol_dom_parse(this.text(), 'application/xml');
+        }
+        xhtml() {
+            return $mol_dom_parse(this.text(), 'application/xhtml+xml');
+        }
+        html() {
+            return $mol_dom_parse(this.text(), 'text/html');
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "stream", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "text", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "buffer", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "xml", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "xhtml", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch_response.prototype, "html", null);
+    $.$mol_fetch_response = $mol_fetch_response;
+    class $mol_fetch extends $mol_object2 {
+        static request(input, init = {}) {
+            const native = globalThis.fetch ?? $node['undici'].fetch;
+            const controller = new AbortController();
+            let done = false;
+            const promise = native(input, {
+                ...init,
+                signal: controller.signal,
+            }).finally(() => {
+                done = true;
+            });
+            return Object.assign(promise, {
+                destructor: () => {
+                    if (!done && !controller.signal.aborted)
+                        controller.abort();
+                },
+            });
+        }
+        static response(input, init) {
+            return new $mol_fetch_response($mol_wire_sync(this).request(input, init));
+        }
+        static success(input, init) {
+            const response = this.response(input, init);
+            if (response.status() === 'success')
+                return response;
+            throw new Error(response.message());
+        }
+        static stream(input, init) {
+            return this.success(input, init).stream();
+        }
+        static text(input, init) {
+            return this.success(input, init).text();
+        }
+        static json(input, init) {
+            return this.success(input, init).json();
+        }
+        static buffer(input, init) {
+            return this.success(input, init).buffer();
+        }
+        static xml(input, init) {
+            return this.success(input, init).xml();
+        }
+        static xhtml(input, init) {
+            return this.success(input, init).xhtml();
+        }
+        static html(input, init) {
+            return this.success(input, init).html();
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "response", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "success", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "stream", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "text", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "json", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "buffer", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "xml", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "xhtml", null);
+    __decorate([
+        $mol_action
+    ], $mol_fetch, "html", null);
+    $.$mol_fetch = $mol_fetch;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -9944,7 +10210,26 @@ var $;
     var $$;
     (function ($$) {
         class $sib_app extends $.$sib_app {
+            login() {
+                return 'Login';
+            }
+            static user(next) {
+                console.log('user', next);
+                return next ?? null;
+                if (next) {
+                    console.log('fetch user');
+                    $mol_fetch.json('/api/auth');
+                }
+                console.log('after fetch');
+                return next ?? null;
+            }
+            body() {
+                return [$sib_app.user() ? this.Pages() : this.Auth()];
+            }
         }
+        __decorate([
+            $mol_mem
+        ], $sib_app, "user", null);
         $$.$sib_app = $sib_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

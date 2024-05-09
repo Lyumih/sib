@@ -609,10 +609,15 @@ $sib_about $mol_page
 					name \Логин
 					bid <= name_bid \
 					control <= Login_control $mol_string
-						value? <=> name? \
+						value? <=> name? \capitan
 			buttons /
 				<= Login_submit $mol_button_major
 					title \Войти или зарегистрироваться
+					click? <=> signup? null
+					enabled <= signup_allowed false
+		<= Logout $mol_button_major
+			title \Выйти
+			click? <=> logout? null
 
 $sib_hero $mol_page
 	title \Зеркало
@@ -628,6 +633,11 @@ $sib_island $mol_page
 
 $sib_create $mol_page
 	title \Вдохновение
+	body /
+
+- $mol_page_json возвращало бы не стандартный html, a aplication-json
+- $sib_api $mol_page_json
+$sib_api $mol_page
 	body /
 
 $mol_book2 $mol_scroll
@@ -771,6 +781,7 @@ $sib_app $mol_page
 			uri \https://t.me/h_y_o_o/4484
 		<= Sources $mol_link_source uri \https://github.com/Lyumih/sib
 	body /
+		<= Auth $sib_about
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
 			param \p
@@ -780,3 +791,4 @@ $sib_app $mol_page
 				hero_page <= Hero_page $sib_hero
 				island_page <= Island_page $sib_island
 				create <= Create_page $sib_create
+				api <= Api $sib_api

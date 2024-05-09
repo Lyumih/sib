@@ -205,16 +205,20 @@
     "$sib_hero",
     "$sib_island",
     "$sib_create",
+    "$sib_api",
     "$mol_book2_catalog",
     "$mol_book2",
     "$mol_search",
     "$mol_pop",
     "$mol_nav",
     "$mol_icon_close",
-    "$mol_match"
+    "$mol_match",
+    "$mol_fetch",
+    "$mol_dom_parse"
   ],
   "dependencies": {
     "jsdom": "*",
-    "chokidar": "*"
+    "chokidar": "*",
+    "undici": "*"
   }
 }
