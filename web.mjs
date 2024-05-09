@@ -8439,8 +8439,6 @@ var $;
     (function ($$) {
         class $sib_about extends $.$sib_about {
             signup(next) {
-                console.log(next);
-                console.log(this.name());
                 $sib_app.user({ login: this.name() });
             }
             signup_allowed() {
@@ -9587,16 +9585,10 @@ var $;
     var $$;
     (function ($$) {
         class $sib_app extends $.$sib_app {
-            login() {
-                return 'Login';
-            }
             static user(next) {
-                console.log('user', next);
-                if (next) {
-                    return $sib_fetch.post('/auth?123=56', next) ?? null;
-                }
-                console.log('after fetch');
-                return next ?? null;
+                if (next === undefined)
+                    return $mol_state_local.value('user');
+                return $mol_state_local.value('user', next === null ? null : $sib_fetch.post('/auth', next));
             }
             body() {
                 return [$sib_app.user() ? this.Pages() : this.Auth()];
