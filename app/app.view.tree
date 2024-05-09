@@ -18,6 +18,9 @@ $sib_app $mol_page
 					title \Персонаж
 					body /
 						<= Hero_name $mol_paragraph title \Капитан Моль
+						<= Item_title $mol_paragraph title \Предметы
+						<= Skill_title $mol_paragraph title \Умения
+						<= Stats_title $mol_paragraph title \Статистика
 				island <= Island_page $mol_page
 					title \Острава
 				create <= Create_page $mol_page
