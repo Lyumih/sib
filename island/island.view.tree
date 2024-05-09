@@ -1,13 +1,18 @@
-$sib_island $mol_page
-	title \Архипелаг
-	body /
-		<= Island_title $mol_paragraph title \Острова
-		<= Island_count $mol_paragraph title <= island_count \
-		<= Island_list $mol_list rows <= island_list /
-			<= Island*0 $mol_row sub /
-				<= Island_name* $mol_paragraph title <= island_name* \
-				<= Scene_count* $mol_paragraph title <= scene_count* \
-				<= Start_button* $mol_button_major
-					title <= status_button* \
-					click? <=> start*? null
-					enabled <= start_enabled* false
+$sib_island $mol_book2
+	pages /
+		<= Island_page $mol_page
+			title \Архипелаг
+			body /
+				<= Island_title $mol_paragraph title <= island_count \
+				<= Island_list $mol_list rows <= island_list /
+					<= Island*0 $mol_row sub /
+						<= Island_name* $mol_labeler
+							title <= island_name* \
+							content / 
+								<= scene_count* \
+						<= Start_button* $mol_button_major
+							title <= status_button* \
+							click? <=> start*? null
+							enabled <= start_enabled* false
+		<= Scene $sib_scene
+			island_id <= current_island \quest-1

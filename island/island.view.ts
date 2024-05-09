@@ -9,7 +9,7 @@ namespace $.$$ {
 		name: string,
 		description: string,
 		status: 'open' | 'active' | 'closed' | 'denied',
-		scenes: any[]
+		scenes: $sib_scene_Scene_Type[]
 	}
 	type Island = $sib_island_Island_Type
 
@@ -17,7 +17,6 @@ namespace $.$$ {
 
 		@$mol_mem
 		static islands( next?: IslandProps | null ) {
-			console.log( 'islands', next )
 			if( next === undefined && $mol_state_local.value<Island[]>( 'quest' ) ) return $mol_state_local.value<Island[]>( 'quest' )
 			return $mol_state_local.value<Island[]>( 'quest', next === null ? null : $sib_fetch.get<Island[]>( '/quest' ) )
 		}
@@ -39,7 +38,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		island_count(): string {
-			return `Кол-во: ${ this.islands()?.length || 0 }`
+			return `Острова: ${ this.islands()?.length || 0 }`
 		}
 
 		island_name( id: any ): string {

@@ -1,6 +1,47 @@
 namespace $ {
 
-	type Island = $.$$.$sib_island_Island_Type
+	type Island = $$.$sib_island_Island_Type
+	type Scene = $$.$sib_scene_Scene_Type
+
+	const scenes_quest_1: Scene[] = [ {
+		question: `Шагнув за край земли вы добрались до альтернативного мира Энтропия. 
+Мир летающих архипелагов остров, окруженным тропами.
+Между ними виднеются тонкие нити попутного ветра. Без ветра плыть в невесомости некуда. Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ..`,
+		step: '0'
+	} ]
+
+	const quest: Island[] = [ {
+		id: 'quest-1',
+		name: 'Прибытие',
+		description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
+		status: 'active',
+		scenes: scenes_quest_1,
+	}, {
+		id: 'quest-2',
+		name: 'Первый бой',
+		description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
+		status: 'open',
+		scenes: []
+	}, {
+		id: 'quest-3',
+		name: 'Свой квест',
+		description: 'Создание первого своего квеста (можно заглушку)',
+		status: 'closed',
+		scenes: []
+	}, {
+		id: 'quest-4',
+		name: 'Первый бой',
+		description: 'Найти квест другого человека',
+		status: 'denied',
+		scenes: []
+	}, {
+		id: 'quest-5',
+		name: 'Первый босс',
+		description: 'Сложный квест, который можно пройти только с очень прокаченными навыками и предметами и удачей. С первых 2 попыток нельзя пройти.',
+		status: 'denied',
+		scenes: []
+	} ]
+
 	export class $sib_api extends $mol_fetch {
 		json( input: RequestInfo, init?: RequestInit ) {
 			return this.json_response( input, init )
@@ -34,37 +75,7 @@ namespace $ {
 		}
 
 		quest( params: any, body: any ) {
-			return [ {
-				id: 'quest-1',
-				name: 'Прибытие',
-				description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
-				status: 'active',
-				scenes: [ {} ],
-			}, {
-				id: 'quest-2',
-				name: 'Первый бой',
-				description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
-				status: 'open',
-				scenes: []
-			}, {
-				id: 'quest-3',
-				name: 'Свой квест',
-				description: 'Создание первого своего квеста (можно заглушку)',
-				status: 'closed',
-				scenes: []
-			}, {
-				id: 'quest-4',
-				name: 'Первый бой',
-				description: 'Найти квест другого человека',
-				status: 'denied',
-				scenes: []
-			}, {
-				id: 'quest-5',
-				name: 'Первый босс',
-				description: 'Сложный квест, который можно пройти только с очень прокаченными навыками и предметами и удачей. С первых 2 попыток нельзя пройти.',
-				status: 'denied',
-				scenes: []
-			} ] as Island[]
+			return quest
 		}
 
 	}

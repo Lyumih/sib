@@ -16,6 +16,6 @@ $sib_app $mol_page
 			spreads *
 				\
 					<= About_page $sib_about
-				hero_page <= Hero_page $sib_hero
-				island_page <= Island_page $sib_island
-				create <= Create_page $sib_create
+				h <= Hero_page $sib_hero
+				i <= Island_page $sib_island
+				c <= Create_page $sib_create
