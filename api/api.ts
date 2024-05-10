@@ -4,10 +4,13 @@ namespace $ {
 	type Scene = $$.$sib_scene_Scene_Type
 
 	const scenes_quest_1: Scene[] = [ {
-		question: `Шагнув за край земли вы добрались до альтернативного мира Энтропия. 
-Мир летающих архипелагов остров, окруженным тропами.
-Между ними виднеются тонкие нити попутного ветра. Без ветра плыть в невесомости некуда. Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ..`,
-		step: '0'
+		step: '0',
+		bg: 'https://images.wallpaperscraft.ru/image/single/lodka_ozero_gory_964376_1280x720.jpg',
+		question: `Шагнув за край земли мы добрались до альтернативного мира **Энтропия**. 
+Мир летающих архипелагов и островов.
+![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
+Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
+Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ...`,
 	} ]
 
 	const quest: Island[] = [ {
