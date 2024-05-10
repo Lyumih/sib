@@ -41,7 +41,7 @@ namespace $.$$ {
 		}
 
 		normalize_question( question?: string ) {
-			const transformation = question?.replaceAll( '@@', `#!p=i/island=${ this.island_id() }/step=` )
+			const transformation = question?.replaceAll( $sib_config.scene().next, `#!p=i/island=${ this.island_id() }/step=` )
 			return transformation
 		}
 
