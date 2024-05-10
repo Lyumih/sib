@@ -1,3 +1,40 @@
-$sib_create $mol_page
-	title \Вдохновение
-	body /
+$sib_create $mol_book2
+	pages /
+		<= Create_page $mol_page
+			title \Вдохновение
+			tools /
+				<= Create $mol_button_minor
+					sub / <= Create_icon $mol_icon_map_marker_plus_outline
+			body /
+				<= Island_choose $mol_button_minor
+					sub /
+						<= Island_choose_labeler $mol_labeler
+							title \Одинокое дерево
+							content / <= Island_choose_description $mol_paragraph
+								title \Почему оно ещё не завяло?
+		<= Edit_page $mol_page
+			title \Трансформация
+			tools /
+				<= Save $mol_button_minor
+					sub / <= Save_icon $mol_icon_cloud_upload_outline
+			body /
+				<= Island_name_labeler $mol_labeler
+					title \Имя острова
+					content / <= Island_name $mol_string
+				<= Island_description_labeler $mol_labeler
+					title \Описание острова
+					content / <= Island_description $mol_textarea
+				<= Scene_title $mol_section title \Путешествие
+				<= Step_labeler $mol_labeler
+					title \Шаг
+					content / <= Step $mol_string
+				<= Bg_labeler $mol_labeler
+					title \Фон
+					content / <= Bg $mol_string
+				<= Question_labeler $mol_labeler
+					title \Вопрос
+					content / <= Question $mol_textarea
+				<= Delete_scene $mol_button_minor
+					title \Удалить
+				<= Add_scene $mol_button_minor
+					title \Добавить шаг

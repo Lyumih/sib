@@ -38,6 +38,7 @@ namespace $.$$ {
 			return this.hero()?.name || 'no name'
 		}
 
+		@$mol_mem
 		item_list(): readonly any[] {
 			return this.hero()?.items.map( ( item ) => this.Item( item.name ) ) || []
 		}
@@ -55,6 +56,7 @@ namespace $.$$ {
 			return this.get_item( id )?.description || 'no description'
 		}
 
+		@$mol_mem
 		skill_list(): readonly any[] {
 			return this.hero()?.skills.map( ( skill ) => this.Skill( skill.name ) ) || []
 		}

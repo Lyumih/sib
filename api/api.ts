@@ -11,7 +11,17 @@ namespace $ {
 				name: 'Волшебная лопата',
 				description: 'Верный товарищ, находящий любой путь',
 				level: 1
-			}
+			},
+			{
+				name: 'Нож',
+				description: 'Неплохая зубочистка',
+				level: 1
+			},
+			{
+				name: 'Яблоко',
+				description: 'Зелёное и очень сочное',
+				level: 1
+			},
 		],
 		skills: [
 			{
