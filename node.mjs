@@ -8998,7 +8998,6 @@ var $;
                 return $sib_hero.hero();
             }
             hero_name() {
-                console.log(this.hero()?.items, this.hero());
                 return this.hero()?.name || 'no name';
             }
             item_list() {
@@ -9032,6 +9031,9 @@ var $;
         __decorate([
             $mol_mem
         ], $sib_hero.prototype, "hero", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "hero_name", null);
         __decorate([
             $mol_mem
         ], $sib_hero.prototype, "item_list", null);
