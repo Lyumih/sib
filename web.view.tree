@@ -625,6 +625,7 @@ $sib_scene $mol_page
 	title <= island_name \Остров
 	style *
 		background <= bg_url \
+		flexBasis \60em
 	tools /
 		<= Close $mol_button_major
 			title \Уплыть

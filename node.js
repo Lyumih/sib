@@ -9205,7 +9205,7 @@ var $;
 			return (this.island_name());
 		}
 		style(){
-			return {"background": (this.bg_url())};
+			return {"background": (this.bg_url()), "flexBasis": "60em"};
 		}
 		tools(){
 			return [(this.Close())];
@@ -9237,8 +9237,8 @@ var $;
                 return this.island()?.scenes || [];
             }
             step() {
-                console.log($mol_state_arg.value('step'));
-                return $mol_state_arg.value('step');
+                console.log('step', $mol_state_arg.value('step'));
+                return $mol_state_arg.value('step') || '0';
             }
             current_scene() {
                 return this.scenes()?.find(scene => scene.step === this.step());
@@ -9269,6 +9269,9 @@ var $;
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "island", null);
+        __decorate([
+            $mol_mem
+        ], $sib_scene.prototype, "step", null);
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "current_scene", null);
@@ -9417,7 +9420,6 @@ var $;
             start(id, next) {
                 console.log('start', id, next);
                 $mol_state_arg.value('island', id);
-                $mol_state_arg.value('step', '0');
             }
             current_island() {
                 return $mol_state_arg.value('island');
@@ -9438,6 +9440,9 @@ var $;
         __decorate([
             $mol_mem
         ], $sib_island.prototype, "island_count", null);
+        __decorate([
+            $mol_mem_key
+        ], $sib_island.prototype, "start", null);
         __decorate([
             $mol_mem
         ], $sib_island, "islands", null);
