@@ -8223,6 +8223,17 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_logout) = class $mol_icon_logout extends ($.$mol_icon) {
+		path(){
+			return "M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
 	($.$mol_icon_telegram) = class $mol_icon_telegram extends ($.$mol_icon) {
 		path(){
 			return "M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z";
@@ -8825,25 +8836,11 @@ var $;
 			(obj.buttons) = () => ([(this.Login_submit())]);
 			return obj;
 		}
-		logout(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Logout(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Выйти");
-			(obj.click) = (next) => ((this.logout(next)));
-			return obj;
-		}
 		title(){
 			return "О мире";
 		}
 		body(){
-			return [
-				(this.About_text()), 
-				(this.Login()), 
-				(this.Logout())
-			];
+			return [(this.About_text()), (this.Login())];
 		}
 	};
 	($mol_mem(($.$sib_about.prototype), "About_text"));
@@ -8853,8 +8850,6 @@ var $;
 	($mol_mem(($.$sib_about.prototype), "signup"));
 	($mol_mem(($.$sib_about.prototype), "Login_submit"));
 	($mol_mem(($.$sib_about.prototype), "Login"));
-	($mol_mem(($.$sib_about.prototype), "logout"));
-	($mol_mem(($.$sib_about.prototype), "Logout"));
 
 
 ;
@@ -8873,11 +8868,8 @@ var $;
             signup_allowed() {
                 return this.name().length > 3;
             }
-            logout(next) {
-                $sib_app.user(null);
-            }
             body() {
-                return [this.About_text(), $sib_app.user() ? this.Logout() : this.Login()];
+                return [this.About_text(), $sib_app.user() ? null : this.Login()];
             }
         }
         $$.$sib_about = $sib_about;
@@ -9190,6 +9182,16 @@ var $;
 		bg_url(){
 			return "";
 		}
+		leave(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Close(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Уплыть");
+			(obj.click) = (next) => ((this.leave(next)));
+			return obj;
+		}
 		question(next){
 			if(next !== undefined) return next;
 			return "";
@@ -9202,16 +9204,18 @@ var $;
 		title(){
 			return (this.island_name());
 		}
-		island_id(){
-			return "";
-		}
 		style(){
 			return {"background": (this.bg_url())};
+		}
+		tools(){
+			return [(this.Close())];
 		}
 		body(){
 			return [(this.Question())];
 		}
 	};
+	($mol_mem(($.$sib_scene.prototype), "leave"));
+	($mol_mem(($.$sib_scene.prototype), "Close"));
 	($mol_mem(($.$sib_scene.prototype), "question"));
 	($mol_mem(($.$sib_scene.prototype), "Question"));
 
@@ -9234,7 +9238,7 @@ var $;
             }
             step() {
                 console.log($mol_state_arg.value('step'));
-                return $mol_state_arg.value('step') || '0';
+                return $mol_state_arg.value('step');
             }
             current_scene() {
                 return this.scenes()?.find(scene => scene.step === this.step());
@@ -9242,13 +9246,24 @@ var $;
             island_name() {
                 return "🌌" + this.island()?.name || 'no name';
             }
+            island_id() {
+                return $mol_state_arg.value('island') || '';
+            }
             question() {
-                console.log(this.current_scene(), this.scenes(), this.island_id(), this.island(), $sib_island.islands());
-                return this.current_scene()?.question || 'Поздравляю! Остров исследован';
+                console.log('question', this.current_scene()?.question);
+                return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован';
+            }
+            normalize_question(question) {
+                return question?.replaceAll('@@', `#!p=i/island=${this.island_id()}/step=`);
             }
             bg_url() {
                 const base_background = 'https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg';
                 return `center / cover no-repeat url(${this.current_scene()?.bg || base_background})`;
+            }
+            leave(next) {
+                console.log('leave');
+                $mol_state_arg.value('step', null);
+                $mol_state_arg.value('island', null);
             }
         }
         __decorate([
@@ -9257,9 +9272,6 @@ var $;
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "current_scene", null);
-        __decorate([
-            $mol_mem
-        ], $sib_scene.prototype, "question", null);
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "bg_url", null);
@@ -9332,12 +9344,8 @@ var $;
 			(obj.body) = () => ([(this.Island_title()), (this.Island_list())]);
 			return obj;
 		}
-		current_island(){
-			return "quest-1";
-		}
 		Scene(){
 			const obj = new this.$.$sib_scene();
-			(obj.island_id) = () => ((this.current_island()));
 			return obj;
 		}
 		pages(){
@@ -9408,6 +9416,14 @@ var $;
             }
             start(id, next) {
                 console.log('start', id, next);
+                $mol_state_arg.value('island', id);
+                $mol_state_arg.value('step', '0');
+            }
+            current_island() {
+                return $mol_state_arg.value('island');
+            }
+            pages() {
+                return [this.current_island() ? this.Scene() : this.Island_page()];
             }
         }
         __decorate([
@@ -9440,25 +9456,32 @@ var $;
 Мир летающих архипелагов и островов.
 ![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
 Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
-Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ...`,
+Находясь на одной из них, [подплывает к острову](@@1) ...`,
         }, {
             step: '1',
             question: `Мы подплыли к небольшому летающему острову с футбольное поле. 
 Чувствуете ветер, наполненный свежестью и необычные ощущения вокруг тела. Я собираюсь прыгнуть в неизвестность, как замечаю, что моя верная Святая лопата начинает немного светиться и переливаться на солнце. 
-[Прыгнуть в неизвестность](#!p=i/step=2)
+[Прыгнуть в неизвестность](@@2)
 ![](https://avatars.mds.yandex.net/i?id=e30d2886f5ff78e176fe80c868722254c790ab46-12471923-images-thumbs&n=13)`,
         }, {
             step: '2',
             question: `Чувствуется легкое сопротивление, время замедляется и сжимается до доли секунд. Вспышка света и вы оказываетесь на зеленом пустом острове. 
 Я начал ходить по острову. У самого края острова лопата начала вибрировать в руках и испускать волны света.
-[Протянуть лопату](#!p=i/step=3)`,
+[Протянуть лопату](@@3)`,
         }, {
             step: '3',
             question: `Лопата издает писк и яркий свет.
 Появляется ветреной след к новому острову, которого раньше не было.
-Путь открыт. [Пора возвращаться к кораблю](#!p=i/step=4) и плыть дальше. У меня плохое предчувствие
-`,
+Путь открыт. [Пора возвращаться к кораблю](@@4) и плыть дальше. У меня плохое предчувствие`,
         },];
+    const scenes_quest_2 = [
+        {
+            step: '0',
+            question: `Новый остров оказался тоже небольшим. Под зелёным деревцем оказалось доброе зелёное существо. 
+Я приветственно помахал ему лопатой и решил [подойти поздороваться](@@1).
+Первый контакт, так сказать.`,
+        }
+    ];
     const quest = [{
             id: 'quest-1',
             name: 'Прибытие',
@@ -9470,7 +9493,7 @@ var $;
             name: 'Первый бой',
             description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
             status: 'open',
-            scenes: []
+            scenes: scenes_quest_2
         }, {
             id: 'quest-3',
             name: 'Свой квест',
@@ -10484,6 +10507,28 @@ var $;
 			(obj.text) = () => ((this.hero_name()));
 			return obj;
 		}
+		Logout_icon(){
+			const obj = new this.$.$mol_icon_logout();
+			return obj;
+		}
+		logout(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Logout(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.sub) = () => ([(this.Logout_icon())]);
+			(obj.click) = (next) => ((this.logout(next)));
+			return obj;
+		}
+		user_tools(){
+			return [(this.Hero_name()), (this.Logout())];
+		}
+		User_tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.user_tools()));
+			return obj;
+		}
 		Telegram_icon(){
 			const obj = new this.$.$mol_icon_telegram();
 			return obj;
@@ -10539,7 +10584,7 @@ var $;
 		}
 		tools(){
 			return [
-				(this.Hero_name()), 
+				(this.User_tools()), 
 				(this.Telegram()), 
 				(this.Sources())
 			];
@@ -10550,6 +10595,10 @@ var $;
 	};
 	($mol_mem(($.$sib_app.prototype), "Theme"));
 	($mol_mem(($.$sib_app.prototype), "Hero_name"));
+	($mol_mem(($.$sib_app.prototype), "Logout_icon"));
+	($mol_mem(($.$sib_app.prototype), "logout"));
+	($mol_mem(($.$sib_app.prototype), "Logout"));
+	($mol_mem(($.$sib_app.prototype), "User_tools"));
 	($mol_mem(($.$sib_app.prototype), "Telegram_icon"));
 	($mol_mem(($.$sib_app.prototype), "Telegram"));
 	($mol_mem(($.$sib_app.prototype), "Sources"));
@@ -10576,8 +10625,14 @@ var $;
                     return $mol_state_local.value('user');
                 return $mol_state_local.value('user', next === null ? null : $sib_fetch.post('/auth', next));
             }
+            logout(next) {
+                $sib_app.user(null);
+            }
             hero_name() {
                 return $sib_app.user() ? `${$sib_app.user()?.name}@${$sib_app.user()?.login}` : '-';
+            }
+            user_tools() {
+                return $sib_app.user() ? [this.Hero_name(), this.Logout()] : [];
             }
             body() {
                 return [$sib_app.user() ? this.Pages() : this.Auth()];

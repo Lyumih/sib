@@ -190,6 +190,7 @@
     "$mol_embed_youtube",
     "$mol_icon_youtube",
     "$mol_frame",
+    "$mol_icon_logout",
     "$mol_icon_telegram",
     "$mol_link_source",
     "$mol_icon_script_text",
