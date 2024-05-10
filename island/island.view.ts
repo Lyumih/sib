@@ -70,10 +70,10 @@ namespace $.$$ {
 			}
 		}
 
+		@$mol_mem_key
 		start( id: string, next?: any ) {
 			console.log( 'start', id, next )
 			$mol_state_arg.value( 'island', id )
-			$mol_state_arg.value( 'step', '0' )
 		}
 
 		current_island() {

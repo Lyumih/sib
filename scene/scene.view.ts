@@ -16,9 +16,10 @@ namespace $.$$ {
 			return this.island()?.scenes || []
 		}
 
+		@$mol_mem
 		step() {
-			console.log( $mol_state_arg.value( 'step' ) )
-			return $mol_state_arg.value( 'step' )
+			console.log( 'step', $mol_state_arg.value( 'step' ) )
+			return $mol_state_arg.value( 'step' ) || '0'
 		}
 
 		@$mol_mem

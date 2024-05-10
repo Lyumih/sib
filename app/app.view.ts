@@ -12,7 +12,6 @@ namespace $.$$ {
 			return $mol_state_local.value<User>( 'user', next === null ? null : $sib_fetch.post<User, UserProps>( '/auth', next ) )
 		}
 
-
 		logout( next?: any ) {
 			$sib_app.user( null )
 		}
