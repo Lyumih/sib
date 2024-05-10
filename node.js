@@ -9175,6 +9175,50 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_cloud) = class $mol_icon_cloud extends ($.$mol_icon) {
+		path(){
+			return "M6.5 20Q4.22 20 2.61 18.43 1 16.85 1 14.58 1 12.63 2.17 11.1 3.35 9.57 5.25 9.15 5.88 6.85 7.75 5.43 9.63 4 12 4 14.93 4 16.96 6.04 19 8.07 19 11 20.73 11.2 21.86 12.5 23 13.78 23 15.5 23 17.38 21.69 18.69 20.38 20 18.5 20Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_cloud_refresh) = class $mol_icon_cloud_refresh extends ($.$mol_icon) {
+		path(){
+			return "M12 18.5C12 19 12.07 19.5 12.18 20H6.5C5 20 3.69 19.5 2.61 18.43C1.54 17.38 1 16.09 1 14.58C1 13.28 1.39 12.12 2.17 11.1S4 9.43 5.25 9.15C5.67 7.62 6.5 6.38 7.75 5.43S10.42 4 12 4C13.95 4 15.6 4.68 16.96 6.04C18.32 7.4 19 9.05 19 11C20.15 11.13 21.1 11.63 21.86 12.5C22.1 12.76 22.29 13.05 22.46 13.36C21.36 12.5 20 12 18.5 12C14.91 12 12 14.91 12 18.5M18 14.5C15.79 14.5 14 16.29 14 18.5S15.79 22.5 18 22.5C19.68 22.5 21.12 21.47 21.71 20H20C19.54 20.61 18.82 21 18 21C16.62 21 15.5 19.88 15.5 18.5S16.62 16 18 16C18.69 16 19.32 16.28 19.77 16.73L18 18.5H22V14.5L20.83 15.67C20.11 14.95 19.11 14.5 18 14.5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_cloud_refresh_variant) = class $mol_icon_cloud_refresh_variant extends ($.$mol_icon) {
+		path(){
+			return "M21.86 12.5C21.1 11.63 20.15 11.13 19 11C19 9.05 18.32 7.4 16.96 6.04C15.6 4.68 13.95 4 12 4C10.42 4 9 4.47 7.75 5.43S5.67 7.62 5.25 9.15C4 9.43 2.96 10.08 2.17 11.1S1 13.28 1 14.58C1 16.09 1.54 17.38 2.61 18.43C3.69 19.5 5 20 6.5 20H18.5C19.75 20 20.81 19.56 21.69 18.69C22.56 17.81 23 16.75 23 15.5C23 14.35 22.62 13.35 21.86 12.5M16 13H12L13.77 11.23C13.32 10.78 12.69 10.5 12 10.5C10.62 10.5 9.5 11.62 9.5 13S10.62 15.5 12 15.5C12.82 15.5 13.54 15.11 14 14.5H15.71C15.12 15.97 13.68 17 12 17C9.79 17 8 15.21 8 13S9.79 9 12 9C13.11 9 14.11 9.45 14.83 10.17L16 9V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_cloud_refresh_variant_outline) = class $mol_icon_cloud_refresh_variant_outline extends ($.$mol_icon) {
+		path(){
+			return "M21.86 12.5C21.1 11.63 20.15 11.13 19 11C19 9.05 18.32 7.4 16.96 6.04C15.6 4.68 13.95 4 12 4C10.42 4 9 4.47 7.75 5.43S5.67 7.62 5.25 9.15C4 9.43 2.96 10.08 2.17 11.1S1 13.28 1 14.58C1 16.09 1.54 17.38 2.61 18.43C3.69 19.5 5 20 6.5 20H18.5C19.75 20 20.81 19.56 21.69 18.69C22.56 17.81 23 16.75 23 15.5C23 14.35 22.62 13.35 21.86 12.5M20.27 17.27C19.79 17.76 19.2 18 18.5 18H6.5C5.53 18 4.71 17.66 4.03 17C3.34 16.29 3 15.47 3 14.5S3.34 12.71 4.03 12.03C4.71 11.34 5.53 11 6.5 11H7C7 9.62 7.5 8.44 8.46 7.46C9.44 6.5 10.62 6 12 6S14.56 6.5 15.54 7.46C16.5 8.44 17 9.62 17 11V13H18.5C19.2 13 19.79 13.24 20.27 13.73S21 14.8 21 15.5 20.76 16.79 20.27 17.27M14.83 10.17L16 9V13H12L13.77 11.23C13.32 10.78 12.69 10.5 12 10.5C10.62 10.5 9.5 11.62 9.5 13S10.62 15.5 12 15.5C12.82 15.5 13.54 15.11 14 14.5H15.71C15.12 15.97 13.68 17 12 17C9.79 17 8 15.21 8 13S9.79 9 12 9C13.11 9 14.11 9.45 14.83 10.17Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
 	($.$sib_scene) = class $sib_scene extends ($.$mol_page) {
 		island_name(){
 			return "Остров";
@@ -9182,12 +9226,27 @@ var $;
 		bg_url(){
 			return "";
 		}
+		Refresh_icon(){
+			const obj = new this.$.$mol_icon_cloud_refresh_variant_outline();
+			return obj;
+		}
+		refresh(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Refresh(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_button_minor();
+			(obj.sub) = () => ([(this.Refresh_icon())]);
+			(obj.click) = (next) => ((this.refresh(next)));
+			return obj;
+		}
 		leave(next){
 			if(next !== undefined) return next;
 			return null;
 		}
 		Close(){
-			const obj = new this.$.$mol_button_major();
+			const obj = new this.$.$mol_button_minor();
 			(obj.title) = () => ("Уплыть");
 			(obj.click) = (next) => ((this.leave(next)));
 			return obj;
@@ -9208,12 +9267,15 @@ var $;
 			return {"background": (this.bg_url()), "flexBasis": "60em"};
 		}
 		tools(){
-			return [(this.Close())];
+			return [(this.Refresh()), (this.Close())];
 		}
 		body(){
 			return [(this.Question())];
 		}
 	};
+	($mol_mem(($.$sib_scene.prototype), "Refresh_icon"));
+	($mol_mem(($.$sib_scene.prototype), "refresh"));
+	($mol_mem(($.$sib_scene.prototype), "Refresh"));
 	($mol_mem(($.$sib_scene.prototype), "leave"));
 	($mol_mem(($.$sib_scene.prototype), "Close"));
 	($mol_mem(($.$sib_scene.prototype), "question"));
@@ -9251,14 +9313,18 @@ var $;
             }
             question() {
                 console.log('question', this.current_scene()?.question);
-                return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован';
+                return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован. Можно плыть к следующим островам.';
             }
             normalize_question(question) {
-                return question?.replaceAll('@@', `#!p=i/island=${this.island_id()}/step=`);
+                const transformation = question?.replaceAll('@@', `#!p=i/island=${this.island_id()}/step=`);
+                return transformation;
             }
             bg_url() {
                 const base_background = 'https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg';
                 return `center / cover no-repeat url(${this.current_scene()?.bg || base_background})`;
+            }
+            refresh(next) {
+                $mol_state_local.value('quest', null);
             }
             leave(next) {
                 console.log('leave');
@@ -9484,10 +9550,24 @@ var $;
             step: '0',
             question: `Новый остров оказался тоже небольшим. Под зелёным деревцем оказалось доброе зелёное существо. 
 Я приветственно помахал ему лопатой и решил [подойти поздороваться](@@1).
-Первый контакт, так сказать.`,
-        }
+Первый контакт, так сказать.
+![](https://avatars.mds.yandex.net/i?id=5fed9fa4118052551c09f1cf90e46f953c07bb63-9246177-images-thumbs&n=13)`,
+        }, {
+            step: '1',
+            question: `Существом оказалось зелёный [гоблин](@#г). Он как-то нехорошо улыбался, из-за рта текла пена, в руках [яблоко](@#я) и [меч](@#м). Он помахал ножом мне и [пошёл навстречу](@@2)`,
+        }, {
+            step: '2',
+            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@3)`,
+        }, {
+            step: '3',
+            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@4)`,
+        }, {
+            step: '4',
+            question: `Это была неравная битва, но я вышел победителем. [Меч](@#м) мне пригодится ещё, возьму с собой.
+[Отправляемся дальше!](@@5)`,
+        },
     ];
-    const quest = [{
+    const quests = [{
             id: 'quest-1',
             name: 'Прибытие',
             description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
@@ -9523,7 +9603,6 @@ var $;
             return this.json_response(input, init);
         }
         json_response(input, init) {
-            console.log(input, init);
             const [url, params] = input.toString().split('?');
             const body = init?.body && JSON.parse(String(init.body));
             console.log('MOCK REQUEST:', init?.method, url, body, params);
@@ -9547,7 +9626,7 @@ var $;
             throw new Error('Герой не найден');
         }
         quest(params, body) {
-            return quest;
+            return quests;
         }
     }
     $.$sib_api = $sib_api;
