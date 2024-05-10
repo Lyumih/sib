@@ -9,12 +9,8 @@ namespace $.$$ {
 			return this.name().length > 3
 		}
 
-		logout( next?: any ) {
-			$sib_app.user( null )
-		}
-
 		body(): readonly any[] {
-			return [this.About_text(), $sib_app.user() ? this.Logout() : this.Login()]
+			return [this.About_text(), $sib_app.user() ? null : this.Login()]
 		}
 	}
 }

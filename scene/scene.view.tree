@@ -1,7 +1,10 @@
 $sib_scene $mol_page
 	title <= island_name \Остров
-	island_id \
 	style *
 		background <= bg_url \
+	tools /
+		<= Close $mol_button_major
+			title \Уплыть
+			click? <=> leave? null
 	body /
 		<= Question $mol_text text <= question? \

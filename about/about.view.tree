@@ -17,6 +17,3 @@ $sib_about $mol_page
 					title \Войти
 					click? <=> signup? null
 					enabled <= signup_allowed false
-		<= Logout $mol_button_major
-			title \Выйти
-			click? <=> logout? null

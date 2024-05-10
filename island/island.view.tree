@@ -15,4 +15,3 @@ $sib_island $mol_book2
 							click? <=> start*? null
 							enabled <= start_enabled* false
 		<= Scene $sib_scene
-			island_id <= current_island \quest-1

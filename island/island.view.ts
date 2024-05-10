@@ -70,8 +70,18 @@ namespace $.$$ {
 			}
 		}
 
-		start( id: any, next?: any ) {
-			console.log('start', id, next)
+		start( id: string, next?: any ) {
+			console.log( 'start', id, next )
+			$mol_state_arg.value( 'island', id )
+			$mol_state_arg.value( 'step', '0' )
+		}
+
+		current_island() {
+			return $mol_state_arg.value( 'island' ) 
+		}
+
+		pages(): readonly any[] {
+			return [ this.current_island() ? this.Scene() : this.Island_page()]
 		}
 	}
 }

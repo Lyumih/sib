@@ -3,7 +3,11 @@ $sib_app $mol_page
 	plugins /
 		<= Theme $mol_theme_auto theme \$mol_theme_light
 	tools /
-		<= Hero_name $mol_text text <= hero_name \
+		<= User_tools $mol_view sub <= user_tools /
+			<= Hero_name $mol_text text <= hero_name \
+			<= Logout $mol_button_minor
+				sub / <= Logout_icon $mol_icon_logout
+				click? <=> logout? null
 		<= Telegram $mol_link_source
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
