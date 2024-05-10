@@ -33,8 +33,8 @@ namespace $.$$ {
 			return $sib_hero.hero()
 		}
 
+		@$mol_mem
 		hero_name(): string {
-			console.log( this.hero()?.items, this.hero() )
 			return this.hero()?.name || 'no name'
 		}
 
