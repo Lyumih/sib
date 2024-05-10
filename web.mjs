@@ -8424,14 +8424,62 @@ var $;
 			(obj.title) = () => ("Предметы");
 			return obj;
 		}
+		item_title(id){
+			return "";
+		}
+		item_description(id){
+			return "";
+		}
+		Item(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.item_title(id)));
+			(obj.content) = () => ([(this.item_description(id))]);
+			return obj;
+		}
+		item_list(){
+			return [(this.Item("0"))];
+		}
+		Item_list(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.item_list()));
+			return obj;
+		}
 		Skill_title(){
 			const obj = new this.$.$mol_paragraph();
 			(obj.title) = () => ("Умения");
 			return obj;
 		}
+		skill_title(id){
+			return "";
+		}
+		skill_description(id){
+			return "";
+		}
+		Skill(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.skill_title(id)));
+			(obj.content) = () => ([(this.skill_description(id))]);
+			return obj;
+		}
+		skill_list(){
+			return [(this.Skill("0"))];
+		}
+		Skill_list(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.skill_list()));
+			return obj;
+		}
 		Stats_title(){
 			const obj = new this.$.$mol_paragraph();
 			(obj.title) = () => ("Статистика");
+			return obj;
+		}
+		stats(){
+			return "";
+		}
+		Stats(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.stats()));
 			return obj;
 		}
 		title(){
@@ -8441,16 +8489,93 @@ var $;
 			return [
 				(this.Hero_name()), 
 				(this.Item_title()), 
+				(this.Item_list()), 
 				(this.Skill_title()), 
-				(this.Stats_title())
+				(this.Skill_list()), 
+				(this.Stats_title()), 
+				(this.Stats())
 			];
 		}
 	};
 	($mol_mem(($.$sib_hero.prototype), "Hero_name"));
 	($mol_mem(($.$sib_hero.prototype), "Item_title"));
+	($mol_mem_key(($.$sib_hero.prototype), "Item"));
+	($mol_mem(($.$sib_hero.prototype), "Item_list"));
 	($mol_mem(($.$sib_hero.prototype), "Skill_title"));
+	($mol_mem_key(($.$sib_hero.prototype), "Skill"));
+	($mol_mem(($.$sib_hero.prototype), "Skill_list"));
 	($mol_mem(($.$sib_hero.prototype), "Stats_title"));
+	($mol_mem(($.$sib_hero.prototype), "Stats"));
 
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $sib_hero extends $.$sib_hero {
+            static hero(next) {
+                const user = $sib_app.user();
+                if (user) {
+                    if (next === undefined && $mol_state_local.value('hero'))
+                        return $mol_state_local.value('hero');
+                    return $mol_state_local.value('hero', next === null ? null : $sib_fetch.post('/hero', user));
+                }
+            }
+            hero(next) {
+                return $sib_hero.hero();
+            }
+            hero_name() {
+                console.log(this.hero()?.items, this.hero());
+                return this.hero()?.name || 'no name';
+            }
+            item_list() {
+                return this.hero()?.items.map((item) => this.Item(item.name)) || [];
+            }
+            get_item(name) {
+                return this.hero()?.items.find(item => item.name === name);
+            }
+            item_title(id) {
+                return this.get_item(id)?.name + ' Ур. ' + this.get_item(id)?.level;
+            }
+            item_description(id) {
+                return this.get_item(id)?.description || 'no description';
+            }
+            skill_list() {
+                return this.hero()?.skills.map((skill) => this.Skill(skill.name)) || [];
+            }
+            get_skill(name) {
+                return this.hero()?.skills.find(skill => skill.name === name);
+            }
+            skill_title(id) {
+                return this.get_skill(id)?.name + ' Ур. ' + this.get_skill(id)?.level;
+            }
+            skill_description(id) {
+                return this.get_skill(id)?.description || 'no description';
+            }
+            stats() {
+                return `Открыто островов: ${this.hero()?.stats?.islands || 0}`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "hero", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "item_title", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "skill_title", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero, "hero", null);
+        $$.$sib_hero = $sib_hero;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
@@ -8895,185 +9020,6 @@ var $;
             $mol_mem
         ], $sib_island, "islands", null);
         $$.$sib_island = $sib_island;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    const scenes_quest_1 = [{
-            step: '0',
-            bg: 'https://images.wallpaperscraft.ru/image/single/lodka_ozero_gory_964376_1280x720.jpg',
-            question: `Шагнув за край земли мы добрались до альтернативного мира **Энтропия**. 
-Мир летающих архипелагов и островов.
-![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
-Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
-Находясь на одной из них, [подплывает к острову](@@1) ...`,
-        }, {
-            step: '1',
-            question: `Мы подплыли к небольшому летающему острову с футбольное поле. 
-Чувствуете ветер, наполненный свежестью и необычные ощущения вокруг тела. Я собираюсь прыгнуть в неизвестность, как замечаю, что моя верная Святая лопата начинает немного светиться и переливаться на солнце. 
-[Прыгнуть в неизвестность](@@2)
-![](https://avatars.mds.yandex.net/i?id=e30d2886f5ff78e176fe80c868722254c790ab46-12471923-images-thumbs&n=13)`,
-        }, {
-            step: '2',
-            question: `Чувствуется легкое сопротивление, время замедляется и сжимается до доли секунд. Вспышка света и вы оказываетесь на зеленом пустом острове. 
-Я начал ходить по острову. У самого края острова лопата начала вибрировать в руках и испускать волны света.
-[Протянуть лопату](@@3)`,
-        }, {
-            step: '3',
-            question: `Лопата издает писк и яркий свет.
-Появляется ветреной след к новому острову, которого раньше не было.
-Путь открыт. [Пора возвращаться к кораблю](@@4) и плыть дальше. У меня плохое предчувствие`,
-        },];
-    const scenes_quest_2 = [
-        {
-            step: '0',
-            question: `Новый остров оказался тоже небольшим. Под зелёным деревцем оказалось доброе зелёное существо. 
-Я приветственно помахал ему лопатой и решил [подойти поздороваться](@@1).
-Первый контакт, так сказать.
-![](https://avatars.mds.yandex.net/i?id=5fed9fa4118052551c09f1cf90e46f953c07bb63-9246177-images-thumbs&n=13)`,
-        }, {
-            step: '1',
-            question: `Существом оказалось зелёный [гоблин](@#г). Он как-то нехорошо улыбался, из-за рта текла пена, в руках [яблоко](@#я) и [меч](@#м). Он помахал ножом мне и [пошёл навстречу](@@2)`,
-        }, {
-            step: '2',
-            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@3)`,
-        }, {
-            step: '3',
-            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@4)`,
-        }, {
-            step: '4',
-            question: `Это была неравная битва, но я вышел победителем. [Меч](@#м) мне пригодится ещё, возьму с собой.
-[Отправляемся дальше!](@@5)`,
-        },
-    ];
-    const quests = [{
-            id: 'quest-1',
-            name: 'Прибытие',
-            description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
-            status: 'active',
-            scenes: scenes_quest_1,
-        }, {
-            id: 'quest-2',
-            name: 'Первый бой',
-            description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
-            status: 'open',
-            scenes: scenes_quest_2
-        }, {
-            id: 'quest-3',
-            name: 'Свой квест',
-            description: 'Создание первого своего квеста (можно заглушку)',
-            status: 'closed',
-            scenes: []
-        }, {
-            id: 'quest-4',
-            name: 'Первый бой',
-            description: 'Найти квест другого человека',
-            status: 'denied',
-            scenes: []
-        }, {
-            id: 'quest-5',
-            name: 'Первый босс',
-            description: 'Сложный квест, который можно пройти только с очень прокаченными навыками и предметами и удачей. С первых 2 попыток нельзя пройти.',
-            status: 'denied',
-            scenes: []
-        }];
-    class $sib_api extends $mol_fetch {
-        json(input, init) {
-            return this.json_response(input, init);
-        }
-        json_response(input, init) {
-            const [url, params] = input.toString().split('?');
-            const body = init?.body && JSON.parse(String(init.body));
-            console.log('MOCK REQUEST:', init?.method, url, body, params);
-            switch (url) {
-                case '/auth': return this.auth(params, body);
-                case '/hero': return this.hero(params, body);
-                case '/quest': return this.quest(params, body);
-                default: throw new Error('Mock not found: URL: ' + JSON.stringify({ url, method: init?.method, params, body }, null, 2));
-            }
-        }
-        auth(params, body) {
-            if (body.login === 'capitan') {
-                return { login: 'capitan', name: 'Капитан моль' };
-            }
-            throw new Error('Пользователь не найден');
-        }
-        hero(params, body) {
-            if (body.login === 'capitan') {
-                return { name: 'Капитан моль', items: [], skills: [], stats: [] };
-            }
-            throw new Error('Герой не найден');
-        }
-        quest(params, body) {
-            return quests;
-        }
-    }
-    $.$sib_api = $sib_api;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $sib_fetch extends $mol_fetch {
-        static is_mock() {
-            return true;
-        }
-        static mock() {
-            return new $sib_api;
-        }
-        static base_url() {
-            return 'https://lyumih.github.io/sib/api';
-        }
-        static json(url, init) {
-            const input = this.is_mock() ? url : this.base_url() + url;
-            return this.is_mock() ? this.mock().json(input, init) : super.json(input, init);
-        }
-        static post(input, body) {
-            return this.json(input, { body: JSON.stringify(body), method: 'POST' });
-        }
-        static get(input, init) {
-            return this.json(input, { method: 'GET' });
-        }
-    }
-    $.$sib_fetch = $sib_fetch;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $sib_hero extends $.$sib_hero {
-            static hero(next) {
-                const user = $sib_app.user();
-                if (user) {
-                    if (next === undefined && $mol_state_local.value('hero'))
-                        return $mol_state_local.value('hero');
-                    return $mol_state_local.value('hero', next === null ? null : $sib_fetch.post('/hero', user));
-                }
-            }
-            hero(next) {
-                return $sib_hero.hero();
-            }
-            hero_name() {
-                return this.hero()?.name || 'no name';
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $sib_hero.prototype, "hero", null);
-        __decorate([
-            $mol_mem
-        ], $sib_hero, "hero", null);
-        $$.$sib_hero = $sib_hero;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -9957,6 +9903,170 @@ var $;
 
 ;
 "use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    const hero = {
+        name: 'Капитан моль',
+        items: [
+            {
+                name: 'Волшебная лопата',
+                description: 'Верный товарищ, находящий любой путь',
+                level: 1
+            }
+        ],
+        skills: [
+            {
+                name: 'Прыжок в неизвестность',
+                description: 'Позволяет проникнуть на остров',
+                level: 1
+            }
+        ],
+        stats: {
+            islands: 2
+        },
+    };
+    const scenes_quest_1 = [{
+            step: '0',
+            bg: 'https://images.wallpaperscraft.ru/image/single/lodka_ozero_gory_964376_1280x720.jpg',
+            question: `Шагнув за край земли мы добрались до альтернативного мира **Энтропия**. 
+Мир летающих архипелагов и островов.
+![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
+Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
+Находясь на одной из них, [подплывает к острову](@@1) ...`,
+        }, {
+            step: '1',
+            question: `Мы подплыли к небольшому летающему острову с футбольное поле. 
+Чувствуете ветер, наполненный свежестью и необычные ощущения вокруг тела. Я собираюсь прыгнуть в неизвестность, как замечаю, что моя верная Святая лопата начинает немного светиться и переливаться на солнце. 
+[Прыгнуть в неизвестность](@@2)
+![](https://avatars.mds.yandex.net/i?id=e30d2886f5ff78e176fe80c868722254c790ab46-12471923-images-thumbs&n=13)`,
+        }, {
+            step: '2',
+            question: `Чувствуется легкое сопротивление, время замедляется и сжимается до доли секунд. Вспышка света и вы оказываетесь на зеленом пустом острове. 
+Я начал ходить по острову. У самого края острова лопата начала вибрировать в руках и испускать волны света.
+[Протянуть лопату](@@3)`,
+        }, {
+            step: '3',
+            question: `Лопата издает писк и яркий свет.
+Появляется ветреной след к новому острову, которого раньше не было.
+Путь открыт. [Пора возвращаться к кораблю](@@4) и плыть дальше. У меня плохое предчувствие`,
+        },];
+    const scenes_quest_2 = [
+        {
+            step: '0',
+            question: `Новый остров оказался тоже небольшим. Под зелёным деревцем оказалось доброе зелёное существо. 
+Я приветственно помахал ему лопатой и решил [подойти поздороваться](@@1).
+Первый контакт, так сказать.
+![](https://avatars.mds.yandex.net/i?id=5fed9fa4118052551c09f1cf90e46f953c07bb63-9246177-images-thumbs&n=13)`,
+        }, {
+            step: '1',
+            question: `Существом оказалось зелёный [гоблин](@#г). Он как-то нехорошо улыбался, из-за рта текла пена, в руках [яблоко](@#я) и [меч](@#м). Он помахал ножом мне и [пошёл навстречу](@@2)`,
+        }, {
+            step: '2',
+            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@3)`,
+        }, {
+            step: '3',
+            question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@4)`,
+        }, {
+            step: '4',
+            question: `Это была неравная битва, но я вышел победителем. [Меч](@#м) мне пригодится ещё, возьму с собой.
+[Отправляемся дальше!](@@5)`,
+        },
+    ];
+    const quests = [{
+            id: 'quest-1',
+            name: 'Прибытие',
+            description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
+            status: 'active',
+            scenes: scenes_quest_1,
+        }, {
+            id: 'quest-2',
+            name: 'Первый бой',
+            description: 'Попробовать победить 1 противника лопатой, прокачать лопату.',
+            status: 'open',
+            scenes: scenes_quest_2
+        }, {
+            id: 'quest-3',
+            name: 'Свой квест',
+            description: 'Создание первого своего квеста (можно заглушку)',
+            status: 'closed',
+            scenes: []
+        }, {
+            id: 'quest-4',
+            name: 'Первый бой',
+            description: 'Найти квест другого человека',
+            status: 'denied',
+            scenes: []
+        }, {
+            id: 'quest-5',
+            name: 'Первый босс',
+            description: 'Сложный квест, который можно пройти только с очень прокаченными навыками и предметами и удачей. С первых 2 попыток нельзя пройти.',
+            status: 'denied',
+            scenes: []
+        }];
+    class $sib_api extends $mol_fetch {
+        json(input, init) {
+            return this.json_response(input, init);
+        }
+        json_response(input, init) {
+            const [url, params] = input.toString().split('?');
+            const body = init?.body && JSON.parse(String(init.body));
+            console.log('MOCK REQUEST:', init?.method, url, body, params);
+            switch (url) {
+                case '/auth': return this.auth(params, body);
+                case '/hero': return this.hero(params, body);
+                case '/quest': return this.quest(params, body);
+                default: throw new Error('Mock not found: URL: ' + JSON.stringify({ url, method: init?.method, params, body }, null, 2));
+            }
+        }
+        auth(params, body) {
+            if (body.login === 'capitan') {
+                return { login: 'capitan', name: 'Капитан моль' };
+            }
+            throw new Error('Пользователь не найден');
+        }
+        hero(params, body) {
+            if (body.login === 'capitan') {
+                return hero;
+            }
+            throw new Error('Герой не найден');
+        }
+        quest(params, body) {
+            return quests;
+        }
+    }
+    $.$sib_api = $sib_api;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $sib_fetch extends $mol_fetch {
+        static is_mock() {
+            return true;
+        }
+        static mock() {
+            return new $sib_api;
+        }
+        static base_url() {
+            return 'https://lyumih.github.io/sib/api';
+        }
+        static json(url, init) {
+            const input = this.is_mock() ? url : this.base_url() + url;
+            return this.is_mock() ? this.mock().json(input, init) : super.json(input, init);
+        }
+        static post(input, body) {
+            return this.json(input, { body: JSON.stringify(body), method: 'POST' });
+        }
+        static get(input, init) {
+            return this.json(input, { method: 'GET' });
+        }
+    }
+    $.$sib_fetch = $sib_fetch;
+})($ || ($ = {}));
 
 ;
 	($.$sib_app) = class $sib_app extends ($.$mol_page) {
