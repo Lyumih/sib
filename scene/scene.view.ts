@@ -37,11 +37,12 @@ namespace $.$$ {
 
 		question(): string {
 			console.log('question', this.current_scene()?.question)
-			return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован'
+			return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован. Можно плыть к следующим островам.'
 		}
 
 		normalize_question( question?: string ) {
-			return question?.replaceAll( '@@', `#!p=i/island=${this.island_id()}/step=` )
+			const transformation = question?.replaceAll( '@@', `#!p=i/island=${ this.island_id() }/step=` )
+			return transformation
 		}
 
 		@$mol_mem
@@ -49,6 +50,10 @@ namespace $.$$ {
 			// https://wallpaperscraft.ru/wallpaper/nebo_oblaka_otrazheniia_86205 - Сайт с картинками
 			const base_background = 'https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg'
 			return `center / cover no-repeat url(${ this.current_scene()?.bg || base_background })`
+		}
+
+		refresh( next?: any ) {
+			$mol_state_local.value('quest', null)
 		}
 
 		leave( next?: any ) {

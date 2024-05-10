@@ -34,11 +34,25 @@ namespace $ {
 			step: '0',
 			question: `Новый остров оказался тоже небольшим. Под зелёным деревцем оказалось доброе зелёное существо. 
 Я приветственно помахал ему лопатой и решил [подойти поздороваться](@@1).
-Первый контакт, так сказать.`,
-		}
+Первый контакт, так сказать.
+![](https://avatars.mds.yandex.net/i?id=5fed9fa4118052551c09f1cf90e46f953c07bb63-9246177-images-thumbs&n=13)`,
+		}, {
+			step: '1',
+			question: `Существом оказалось зелёный [гоблин](@#г). Он как-то нехорошо улыбался, из-за рта текла пена, в руках [яблоко](@#я) и [меч](@#м). Он помахал ножом мне и [пошёл навстречу](@@2)`,
+		}, {
+			step: '2',
+			question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@3)`,
+		}, {
+			step: '3',
+			question: `Случилось неожиданное - между нами завязался [бой](@~). [После](@@4)`,
+		}, {
+			step: '4',
+			question: `Это была неравная битва, но я вышел победителем. [Меч](@#м) мне пригодится ещё, возьму с собой.
+[Отправляемся дальше!](@@5)`,
+		}, 
 	]
 
-	const quest: Island[] = [ {
+	const quests: Island[] = [ {
 		id: 'quest-1',
 		name: 'Прибытие',
 		description: 'Пройти первый квест, ознакомиться с минимум игры. Ознакомиться с предметом Лопата и умение Прыжок в неизвестность',
@@ -76,7 +90,6 @@ namespace $ {
 		}
 
 		json_response( input: RequestInfo, init?: RequestInit ) {
-			console.log( input, init )
 			const [ url, params ] = input.toString().split( '?' )
 			const body = init?.body && JSON.parse( String( init.body ) )
 			console.log( 'MOCK REQUEST:', init?.method, url, body, params )
@@ -103,7 +116,7 @@ namespace $ {
 		}
 
 		quest( params: any, body: any ) {
-			return quest
+			return quests
 		}
 
 	}

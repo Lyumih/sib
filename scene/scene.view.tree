@@ -4,7 +4,10 @@ $sib_scene $mol_page
 		background <= bg_url \
 		flexBasis \60em
 	tools /
-		<= Close $mol_button_major
+		<= Refresh? $mol_button_minor
+			sub / <= Refresh_icon $mol_icon_cloud_refresh_variant_outline
+			click? <=> refresh? null
+		<= Close $mol_button_minor
 			title \Уплыть
 			click? <=> leave? null
 	body /
