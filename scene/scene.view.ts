@@ -33,7 +33,7 @@ namespace $.$$ {
 		@$mol_mem
 		question(): string {
 			console.log( this.current_scene(), this.scenes(), this.island_id(), this.island(), $sib_island.islands() )
-			return this.current_scene()?.question || '! Неизвестное место'
+			return this.current_scene()?.question || 'Поздравляю! Остров исследован'
 		}
 
 		@$mol_mem
