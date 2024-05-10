@@ -9034,7 +9034,13 @@ var $;
         ], $sib_hero.prototype, "hero", null);
         __decorate([
             $mol_mem
+        ], $sib_hero.prototype, "item_list", null);
+        __decorate([
+            $mol_mem
         ], $sib_hero.prototype, "item_title", null);
+        __decorate([
+            $mol_mem
+        ], $sib_hero.prototype, "skill_list", null);
         __decorate([
             $mol_mem
         ], $sib_hero.prototype, "skill_title", null);
@@ -9492,14 +9498,552 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$sib_create) = class $sib_create extends ($.$mol_page) {
-		title(){
-			return "Вдохновение";
-		}
-		body(){
-			return [];
+	($.$mol_icon_map) = class $mol_icon_map extends ($.$mol_icon) {
+		path(){
+			return "M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3Z";
 		}
 	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_map_marker) = class $mol_icon_map_marker extends ($.$mol_icon) {
+		path(){
+			return "M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_map_marker_plus) = class $mol_icon_map_marker_plus extends ($.$mol_icon) {
+		path(){
+			return "M9,11.5A2.5,2.5 0 0,0 11.5,9A2.5,2.5 0 0,0 9,6.5A2.5,2.5 0 0,0 6.5,9A2.5,2.5 0 0,0 9,11.5M9,2C12.86,2 16,5.13 16,9C16,14.25 9,22 9,22C9,22 2,14.25 2,9A7,7 0 0,1 9,2M15,17H18V14H20V17H23V19H20V22H18V19H15V17Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_map_marker_plus_outline) = class $mol_icon_map_marker_plus_outline extends ($.$mol_icon) {
+		path(){
+			return "M15 17H18V14H20V17H23V19H20V22H18V19H15V17M9 6.5C10.4 6.5 11.5 7.6 11.5 9S10.4 11.5 9 11.5 6.5 10.4 6.5 9 7.6 6.5 9 6.5M9 2C12.9 2 16 5.1 16 9C16 14.2 9 22 9 22S2 14.2 2 9C2 5.1 5.1 2 9 2M9 4C6.2 4 4 6.2 4 9C4 10 4 12 9 18.7C14 12 14 10 14 9C14 6.2 11.8 4 9 4Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_cloud_upload) = class $mol_icon_cloud_upload extends ($.$mol_icon) {
+		path(){
+			return "M11 20H6.5Q4.22 20 2.61 18.43 1 16.85 1 14.58 1 12.63 2.17 11.1 3.35 9.57 5.25 9.15 5.88 6.85 7.75 5.43 9.63 4 12 4 14.93 4 16.96 6.04 19 8.07 19 11 20.73 11.2 21.86 12.5 23 13.78 23 15.5 23 17.38 21.69 18.69 20.38 20 18.5 20H13V12.85L14.6 14.4L16 13L12 9L8 13L9.4 14.4L11 12.85Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_cloud_upload_outline) = class $mol_icon_cloud_upload_outline extends ($.$mol_icon) {
+		path(){
+			return "M6.5 20Q4.22 20 2.61 18.43 1 16.85 1 14.58 1 12.63 2.17 11.1 3.35 9.57 5.25 9.15 5.88 6.85 7.75 5.43 9.63 4 12 4 14.93 4 16.96 6.04 19 8.07 19 11 20.73 11.2 21.86 12.5 23 13.78 23 15.5 23 17.38 21.69 18.69 20.38 20 18.5 20H13Q12.18 20 11.59 19.41 11 18.83 11 18V12.85L9.4 14.4L8 13L12 9L16 13L14.6 14.4L13 12.85V18H18.5Q19.55 18 20.27 17.27 21 16.55 21 15.5 21 14.45 20.27 13.73 19.55 13 18.5 13H17V11Q17 8.93 15.54 7.46 14.08 6 12 6 9.93 6 8.46 7.46 7 8.93 7 11H6.5Q5.05 11 4.03 12.03 3 13.05 3 14.5 3 15.95 4.03 17 5.05 18 6.5 18H9V20M12 13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_textarea) = class $mol_textarea extends ($.$mol_stack) {
+		clickable(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		sidebar_showed(){
+			return false;
+		}
+		press(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		hover(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		enabled(){
+			return true;
+		}
+		spellcheck(){
+			return true;
+		}
+		length_max(){
+			return +Infinity;
+		}
+		selection(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		bring(){
+			return (this.Edit().bring());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		submit_with_ctrl(){
+			return true;
+		}
+		Edit(){
+			const obj = new this.$.$mol_textarea_edit();
+			(obj.value) = (next) => ((this.value(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.spellcheck) = () => ((this.spellcheck()));
+			(obj.length_max) = () => ((this.length_max()));
+			(obj.selection) = (next) => ((this.selection(next)));
+			(obj.submit) = (next) => ((this.submit(next)));
+			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
+			return obj;
+		}
+		row_numb(id){
+			return 0;
+		}
+		highlight(){
+			return "";
+		}
+		View(){
+			const obj = new this.$.$mol_text_code();
+			(obj.text) = () => ((this.value()));
+			(obj.render_visible_only) = () => (false);
+			(obj.row_numb) = (id) => ((this.row_numb(id)));
+			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
+			(obj.highlight) = () => ((this.highlight()));
+			return obj;
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"mol_textarea_clickable": (this.clickable()), 
+				"mol_textarea_sidebar_showed": (this.sidebar_showed())
+			};
+		}
+		event(){
+			return {"keydown": (next) => (this.press(next)), "pointermove": (next) => (this.hover(next))};
+		}
+		sub(){
+			return [(this.Edit()), (this.View())];
+		}
+		symbols_alt(){
+			return {
+				"comma": "<", 
+				"period": ">", 
+				"dash": "−", 
+				"equals": "≈", 
+				"graveAccent": "́", 
+				"forwardSlash": "÷", 
+				"E": "€", 
+				"V": "✔", 
+				"X": "×", 
+				"C": "©", 
+				"P": "§", 
+				"H": "₽", 
+				"key0": "°", 
+				"key8": "•", 
+				"key2": "@", 
+				"key3": "#", 
+				"key4": "$", 
+				"key6": "^", 
+				"key7": "&", 
+				"bracketOpen": "[", 
+				"bracketClose": "]", 
+				"slashBack": "|"
+			};
+		}
+		symbols_alt_ctrl(){
+			return {"space": " "};
+		}
+		symbols_alt_shift(){
+			return {
+				"V": "✅", 
+				"X": "❌", 
+				"O": "⭕", 
+				"key1": "❗", 
+				"key4": "💲", 
+				"key7": "❓", 
+				"comma": "«", 
+				"period": "»", 
+				"semicolon": "“", 
+				"quoteSingle": "”", 
+				"dash": "—", 
+				"equals": "≠", 
+				"graveAccent": "̱", 
+				"bracketOpen": "{", 
+				"bracketClose": "}"
+			};
+		}
+	};
+	($mol_mem(($.$mol_textarea.prototype), "clickable"));
+	($mol_mem(($.$mol_textarea.prototype), "press"));
+	($mol_mem(($.$mol_textarea.prototype), "hover"));
+	($mol_mem(($.$mol_textarea.prototype), "value"));
+	($mol_mem(($.$mol_textarea.prototype), "selection"));
+	($mol_mem(($.$mol_textarea.prototype), "submit"));
+	($mol_mem(($.$mol_textarea.prototype), "Edit"));
+	($mol_mem(($.$mol_textarea.prototype), "View"));
+	($.$mol_textarea_edit) = class $mol_textarea_edit extends ($.$mol_string) {
+		dom_name(){
+			return "textarea";
+		}
+		enter(){
+			return "enter";
+		}
+		field(){
+			return {...(super.field()), "scrollTop": 0};
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_textarea extends $.$mol_textarea {
+            indent_inc() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    let end = start + rows[i].length;
+                    if (end >= from && start <= to) {
+                        if (to === from || start !== to) {
+                            rows[i] = '\t' + rows[i];
+                            to += 1;
+                            end += 1;
+                        }
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from + 1, to]);
+            }
+            indent_dec() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    const end = start + rows[i].length;
+                    if (end >= from && start <= to && rows[i].startsWith('\t')) {
+                        rows[i] = rows[i].slice(1);
+                        to -= 1;
+                        if (start < from)
+                            from -= 1;
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from, to]);
+            }
+            symbol_insert(event) {
+                const symbol = event.shiftKey
+                    ? this.symbols_alt_shift()[$mol_keyboard_code[event.keyCode]]
+                    : event.ctrlKey
+                        ? this.symbols_alt_ctrl()[$mol_keyboard_code[event.keyCode]]
+                        : this.symbols_alt()[$mol_keyboard_code[event.keyCode]];
+                if (!symbol)
+                    return;
+                event.preventDefault();
+                document.execCommand('insertText', false, symbol);
+            }
+            clickable(next) {
+                if (!this.enabled())
+                    return true;
+                return next ?? false;
+            }
+            hover(event) {
+                this.clickable(event.ctrlKey);
+            }
+            press(event) {
+                if (event.altKey) {
+                    this.symbol_insert(event);
+                }
+                else {
+                    switch (event.keyCode) {
+                        case !event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_inc();
+                            break;
+                        case event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_dec();
+                            break;
+                        default: return;
+                    }
+                    event.preventDefault();
+                }
+            }
+            row_numb(index) {
+                return index;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_textarea.prototype, "clickable", null);
+        $$.$mol_textarea = $mol_textarea;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tuser-select: none;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n\tuser-select: auto;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n\tuser-select: none;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_section) = class $mol_section extends ($.$mol_list) {
+		title_dom_name(){
+			return "h1";
+		}
+		Title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.dom_name) = () => ((this.title_dom_name()));
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		tools(){
+			return [];
+		}
+		Tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tools()));
+			return obj;
+		}
+		head(){
+			return [(this.Title()), (this.Tools())];
+		}
+		Head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.head()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.content()));
+			return obj;
+		}
+		level(){
+			return 1;
+		}
+		rows(){
+			return [(this.Head()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_section.prototype), "Title"));
+	($mol_mem(($.$mol_section.prototype), "Tools"));
+	($mol_mem(($.$mol_section.prototype), "Head"));
+	($mol_mem(($.$mol_section.prototype), "Content"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_section extends $.$mol_section {
+            title_dom_name() {
+                return 'h' + this.level();
+            }
+        }
+        $$.$mol_section = $mol_section;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/section/section.view.css", "[mol_section_head] {\n\tjustify-content: space-between;\n\talign-items: flex-end;\n\tflex-wrap: wrap;\n}\n\n[mol_section_title] {\n\tpadding: var(--mol_gap_text);\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[mol_section_title]:where(h1) {\n\tfont-size: 1.5rem;\n}\n\n[mol_section_title]:where(h2) {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h3) {\n\tfont-size: 1.25rem;\n}\n\n[mol_section_title]:where(h4) {\n\tfont-size: 1.25rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h5) {\n\tfont-size: 1rem;\n}\n\n[mol_section_title]:where(h6) {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$sib_create) = class $sib_create extends ($.$mol_book2) {
+		Create_icon(){
+			const obj = new this.$.$mol_icon_map_marker_plus_outline();
+			return obj;
+		}
+		Create(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.sub) = () => ([(this.Create_icon())]);
+			return obj;
+		}
+		Island_choose_description(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("Почему оно ещё не завяло?");
+			return obj;
+		}
+		Island_choose_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Одинокое дерево");
+			(obj.content) = () => ([(this.Island_choose_description())]);
+			return obj;
+		}
+		Island_choose(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.sub) = () => ([(this.Island_choose_labeler())]);
+			return obj;
+		}
+		Create_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Вдохновение");
+			(obj.tools) = () => ([(this.Create())]);
+			(obj.body) = () => ([(this.Island_choose())]);
+			return obj;
+		}
+		Save_icon(){
+			const obj = new this.$.$mol_icon_cloud_upload_outline();
+			return obj;
+		}
+		Save(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.sub) = () => ([(this.Save_icon())]);
+			return obj;
+		}
+		Island_name(){
+			const obj = new this.$.$mol_string();
+			return obj;
+		}
+		Island_name_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Имя острова");
+			(obj.content) = () => ([(this.Island_name())]);
+			return obj;
+		}
+		Island_description(){
+			const obj = new this.$.$mol_textarea();
+			return obj;
+		}
+		Island_description_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Описание острова");
+			(obj.content) = () => ([(this.Island_description())]);
+			return obj;
+		}
+		Scene_title(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ("Путешествие");
+			return obj;
+		}
+		Step(){
+			const obj = new this.$.$mol_string();
+			return obj;
+		}
+		Step_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Шаг");
+			(obj.content) = () => ([(this.Step())]);
+			return obj;
+		}
+		Bg(){
+			const obj = new this.$.$mol_string();
+			return obj;
+		}
+		Bg_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Фон");
+			(obj.content) = () => ([(this.Bg())]);
+			return obj;
+		}
+		Question(){
+			const obj = new this.$.$mol_textarea();
+			return obj;
+		}
+		Question_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Вопрос");
+			(obj.content) = () => ([(this.Question())]);
+			return obj;
+		}
+		Delete_scene(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Удалить");
+			return obj;
+		}
+		Add_scene(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Добавить шаг");
+			return obj;
+		}
+		Edit_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Трансформация");
+			(obj.tools) = () => ([(this.Save())]);
+			(obj.body) = () => ([
+				(this.Island_name_labeler()), 
+				(this.Island_description_labeler()), 
+				(this.Scene_title()), 
+				(this.Step_labeler()), 
+				(this.Bg_labeler()), 
+				(this.Question_labeler()), 
+				(this.Delete_scene()), 
+				(this.Add_scene())
+			]);
+			return obj;
+		}
+		pages(){
+			return [(this.Create_page()), (this.Edit_page())];
+		}
+	};
+	($mol_mem(($.$sib_create.prototype), "Create_icon"));
+	($mol_mem(($.$sib_create.prototype), "Create"));
+	($mol_mem(($.$sib_create.prototype), "Island_choose_description"));
+	($mol_mem(($.$sib_create.prototype), "Island_choose_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Island_choose"));
+	($mol_mem(($.$sib_create.prototype), "Create_page"));
+	($mol_mem(($.$sib_create.prototype), "Save_icon"));
+	($mol_mem(($.$sib_create.prototype), "Save"));
+	($mol_mem(($.$sib_create.prototype), "Island_name"));
+	($mol_mem(($.$sib_create.prototype), "Island_name_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Island_description"));
+	($mol_mem(($.$sib_create.prototype), "Island_description_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Scene_title"));
+	($mol_mem(($.$sib_create.prototype), "Step"));
+	($mol_mem(($.$sib_create.prototype), "Step_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Bg"));
+	($mol_mem(($.$sib_create.prototype), "Bg_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Question"));
+	($mol_mem(($.$sib_create.prototype), "Question_labeler"));
+	($mol_mem(($.$sib_create.prototype), "Delete_scene"));
+	($mol_mem(($.$sib_create.prototype), "Add_scene"));
+	($mol_mem(($.$sib_create.prototype), "Edit_page"));
 
 
 ;
@@ -10549,7 +11093,17 @@ var $;
                 name: 'Волшебная лопата',
                 description: 'Верный товарищ, находящий любой путь',
                 level: 1
-            }
+            },
+            {
+                name: 'Нож',
+                description: 'Неплохая зубочистка',
+                level: 1
+            },
+            {
+                name: 'Яблоко',
+                description: 'Зелёное и очень сочное',
+                level: 1
+            },
         ],
         skills: [
             {
