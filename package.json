@@ -215,6 +215,7 @@
     "$mol_icon_cloud_refresh_variant",
     "$mol_icon_cloud_refresh",
     "$mol_icon_cloud",
+    "$sib_config",
     "$sib_create",
     "$mol_book2_catalog",
     "$mol_search",

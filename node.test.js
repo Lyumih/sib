@@ -9275,6 +9275,22 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $sib_config extends $mol_object {
+        static scene() {
+            return {
+                next: '@@',
+                item: '@#',
+                battle: '@~'
+            };
+        }
+    }
+    $.$sib_config = $sib_config;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -9307,7 +9323,7 @@ var $;
                 return this.normalize_question(this.current_scene()?.question) || 'Поздравляю! Остров исследован. Можно плыть к следующим островам.';
             }
             normalize_question(question) {
-                const transformation = question?.replaceAll('@@', `#!p=i/island=${this.island_id()}/step=`);
+                const transformation = question?.replaceAll($sib_config.scene().next, `#!p=i/island=${this.island_id()}/step=`);
                 return transformation;
             }
             bg_url() {
