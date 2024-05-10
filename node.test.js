@@ -9178,26 +9178,8 @@ var $;
 		island_name(){
 			return "Остров";
 		}
-		Image_left(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		Image_center(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		Image_right(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		Images(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([
-				(this.Image_left()), 
-				(this.Image_center()), 
-				(this.Image_right())
-			]);
-			return obj;
+		bg_url(){
+			return "center / cover no-repeat url(https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg)";
 		}
 		question(next){
 			if(next !== undefined) return next;
@@ -9206,11 +9188,6 @@ var $;
 		Question(){
 			const obj = new this.$.$mol_text();
 			(obj.text) = () => ((this.question()));
-			return obj;
-		}
-		Dialog(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([(this.Question())]);
 			return obj;
 		}
 		title(){
@@ -9222,17 +9199,15 @@ var $;
 		step(){
 			return "0";
 		}
+		style(){
+			return {"background": (this.bg_url())};
+		}
 		body(){
-			return [(this.Images()), (this.Dialog())];
+			return [(this.Question())];
 		}
 	};
-	($mol_mem(($.$sib_scene.prototype), "Image_left"));
-	($mol_mem(($.$sib_scene.prototype), "Image_center"));
-	($mol_mem(($.$sib_scene.prototype), "Image_right"));
-	($mol_mem(($.$sib_scene.prototype), "Images"));
 	($mol_mem(($.$sib_scene.prototype), "question"));
 	($mol_mem(($.$sib_scene.prototype), "Question"));
-	($mol_mem(($.$sib_scene.prototype), "Dialog"));
 
 
 ;
@@ -9262,6 +9237,10 @@ var $;
                 console.log(this.current_scene(), this.scenes(), this.island_id(), this.island(), $sib_island.islands());
                 return this.current_scene()?.question || 'Задайте вопрос';
             }
+            bg_url() {
+                const base_background = 'https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg';
+                return `center / cover no-repeat url(${base_background})`;
+            }
         }
         __decorate([
             $mol_mem
@@ -9269,8 +9248,18 @@ var $;
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "question", null);
+        __decorate([
+            $mol_mem
+        ], $sib_scene.prototype, "bg_url", null);
         $$.$sib_scene = $sib_scene;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("sib/scene/scene.view.css", "[sib_scene_body_content]{\n\tbackground-color: rgba(255,255,255,0.75);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -9433,10 +9422,13 @@ var $;
 var $;
 (function ($) {
     const scenes_quest_1 = [{
-            question: `Шагнув за край земли вы добрались до альтернативного мира Энтропия. 
-Мир летающих архипелагов остров, окруженным тропами.
-Между ними виднеются тонкие нити попутного ветра. Без ветра плыть в невесомости некуда. Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ..`,
-            step: '0'
+            step: '0',
+            bg: 'https://images.wallpaperscraft.ru/image/single/lodka_ozero_gory_964376_1280x720.jpg',
+            question: `Шагнув за край земли мы добрались до альтернативного мира **Энтропия**. 
+Мир летающих архипелагов и островов.
+![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
+Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
+Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ...`,
         }];
     const quest = [{
             id: 'quest-1',
