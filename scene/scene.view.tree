@@ -1,23 +1,7 @@
 $sib_scene $mol_page
 	title <= island_name \Остров
 	island_id \
-	step \0
 	style *
-		background <= bg_url \center / cover no-repeat url(https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg)
+		background <= bg_url \
 	body /
-		- <= Images $mol_row sub /
-			<= Image_left $mol_view
-			<= Image_center $mol_view
-			<= Image_right $mol_view
-		- <= Dialog $mol_list rows /
-		<= Question $mol_text text <= question? \Вопрос 1
-			- <= Answer_list $mol_view sub /
-				<= Answer $mol_button_minor
-					title \Ответ 1
-		- <= Panel $mol_row sub /
-			<= Item_list $mol_row sub /
-				<= Item $mol_button_minor title \Лопата
-			<= Skill_list $mol_row sub /
-				<= Skill $mol_button_minor title \Лечение
-			<= Action_list $mol_row sub /
-				<= Exit $mol_button_minor title \Выйти
+		<= Question $mol_text text <= question? \
