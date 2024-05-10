@@ -8554,11 +8554,11 @@ var $;
 			return "Остров";
 		}
 		bg_url(){
-			return "center / cover no-repeat url(https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg)";
+			return "";
 		}
 		question(next){
 			if(next !== undefined) return next;
-			return "Вопрос 1";
+			return "";
 		}
 		Question(){
 			const obj = new this.$.$mol_text();
@@ -8570,9 +8570,6 @@ var $;
 		}
 		island_id(){
 			return "";
-		}
-		step(){
-			return "0";
 		}
 		style(){
 			return {"background": (this.bg_url())};
@@ -8596,11 +8593,14 @@ var $;
     (function ($$) {
         class $sib_scene extends $.$sib_scene {
             island() {
-                console.log('sib scene', this.island_id());
                 return $sib_island.islands()?.find(island => island.id === this.island_id());
             }
             scenes() {
                 return this.island()?.scenes || [];
+            }
+            step() {
+                console.log($mol_state_arg.value('step'));
+                return $mol_state_arg.value('step') || '0';
             }
             current_scene() {
                 return this.scenes()?.find(scene => scene.step === this.step());
@@ -8610,13 +8610,16 @@ var $;
             }
             question() {
                 console.log(this.current_scene(), this.scenes(), this.island_id(), this.island(), $sib_island.islands());
-                return this.current_scene()?.question || 'Задайте вопрос';
+                return this.current_scene()?.question || '! Неизвестное место';
             }
             bg_url() {
                 const base_background = 'https://images.wallpaperscraft.ru/image/single/nebo_oblaka_otrazheniia_86205_1280x720.jpg';
-                return `center / cover no-repeat url(${base_background})`;
+                return `center / cover no-repeat url(${this.current_scene()?.bg || base_background})`;
             }
         }
+        __decorate([
+            $mol_mem
+        ], $sib_scene.prototype, "island", null);
         __decorate([
             $mol_mem
         ], $sib_scene.prototype, "current_scene", null);
@@ -8804,7 +8807,14 @@ var $;
 ![](https://image.winudf.com/v2/image/Y29tLndDaHJvbm9UcmlnZ2VyV2FsbHBhcGVyc182OTA0MjI4X3NjcmVlbl8xXzE1MzE3MDkwMDBfMDkz/screen-1.webp?h=200&fakeurl=1&type=.webp)
 Между ними виднеются тонкие нити попутного ветра. Без ветра плыть некуда.
 Находясь на одной из них, [подплывает к острову](#!p=i/step=1) ...`,
-        }];
+        }, {
+            step: '1',
+            question: `Мы подплыли к небольшому летающему острову с футбольное поле. 
+Чувствуете ветер, наполненный свежестью и необычные ощущения вокруг тела. Я собираюсь прыгнуть в неизвестность, как замечаю, что моя верная Святая лопата начинает немного светиться и переливаться на солнце. 
+[Прыгнуть в неизвестность](#!p=i/step=2)
+![](https://avatars.mds.yandex.net/i?id=e30d2886f5ff78e176fe80c868722254c790ab46-12471923-images-thumbs&n=13)
+`,
+        },];
     const quest = [{
             id: 'quest-1',
             name: 'Прибытие',
