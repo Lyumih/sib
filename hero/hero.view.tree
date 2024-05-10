@@ -5,5 +5,14 @@ $sib_hero $mol_page
 			title \Имя
 			content / <= hero_name \
 		<= Item_title $mol_paragraph title \Предметы
+		<= Item_list $mol_row sub <= item_list /
+			<= Item*0 $mol_labeler
+				title <= item_title* \
+				content / <= item_description* \
 		<= Skill_title $mol_paragraph title \Умения
+		<= Skill_list $mol_row sub <= skill_list /
+			<= Skill*0 $mol_labeler
+				title <= skill_title* \
+				content / <= skill_description* \
 		<= Stats_title $mol_paragraph title \Статистика
+		<= Stats $mol_text text <= stats \

@@ -1,11 +1,22 @@
 namespace $.$$ {
 	type HeroProps = { login: string }
-	type Hero = {
+	type Item = {
 		name: string,
-		items: [],
-		skills: [],
-		stats: [],
+		description?: string,
+		level: number,
 	}
+	
+	type Stats = {
+		islands?: number,
+	}
+	export type $sib_hero_Hero_Type = {
+		name: string,
+		items: Item[],
+		skills: Item[],
+		stats: Stats,
+	}
+
+	type Hero = $sib_hero_Hero_Type
 	export class $sib_hero extends $.$sib_hero {
 
 		@$mol_mem
@@ -23,8 +34,46 @@ namespace $.$$ {
 		}
 
 		hero_name(): string {
+			console.log( this.hero()?.items, this.hero() )
 			return this.hero()?.name || 'no name'
 		}
-		
+
+		item_list(): readonly any[] {
+			return this.hero()?.items.map( ( item ) => this.Item( item.name ) ) || []
+		}
+
+		get_item( name: string ) {
+			return this.hero()?.items.find( item => item.name === name )
+		}
+
+		@$mol_mem
+		item_title( id: any ): string {
+			return this.get_item( id )?.name + ' Ур. ' + this.get_item( id )?.level
+		}
+
+		item_description( id: any ): string {
+			return this.get_item( id )?.description || 'no description'
+		}
+
+		skill_list(): readonly any[] {
+			return this.hero()?.skills.map( ( skill ) => this.Skill( skill.name ) ) || []
+		}
+
+		get_skill( name: string ) {
+			return this.hero()?.skills.find( skill => skill.name === name )
+		}
+
+		@$mol_mem
+		skill_title( id: any ): string {
+			return this.get_skill( id )?.name + ' Ур. ' + this.get_skill( id )?.level
+		}
+
+		skill_description( id: any ): string {
+			return this.get_skill( id )?.description || 'no description'
+		}
+
+		stats(): string {
+			return `Открыто островов: ${ this.hero()?.stats?.islands || 0 }`
+		}
 	}
 }

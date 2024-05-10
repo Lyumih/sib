@@ -2,6 +2,28 @@ namespace $ {
 
 	type Island = $$.$sib_island_Island_Type
 	type Scene = $$.$sib_scene_Scene_Type
+	type Hero = $$.$sib_hero_Hero_Type
+
+	const hero: Hero = {
+		name: 'Капитан моль',
+		items: [
+			{
+				name: 'Волшебная лопата',
+				description: 'Верный товарищ, находящий любой путь',
+				level: 1
+			}
+		],
+		skills: [
+			{
+				name: 'Прыжок в неизвестность',
+				description: 'Позволяет проникнуть на остров',
+				level: 1
+			}
+		],
+		stats: {
+			islands: 2
+		},
+	}
 
 	const scenes_quest_1: Scene[] = [ {
 		step: '0',
@@ -49,7 +71,7 @@ namespace $ {
 			step: '4',
 			question: `Это была неравная битва, но я вышел победителем. [Меч](@#м) мне пригодится ещё, возьму с собой.
 [Отправляемся дальше!](@@5)`,
-		}, 
+		},
 	]
 
 	const quests: Island[] = [ {
@@ -110,7 +132,7 @@ namespace $ {
 
 		hero( params: any, body: any ) {
 			if( body.login === 'capitan' ) {
-				return { name: 'Капитан моль', items: [], skills: [], stats: [] }
+				return hero
 			}
 			throw new Error( 'Герой не найден' )
 		}
