@@ -6,9 +6,15 @@ $sib_app $mol_page
 		<= User_tools $mol_view sub <= user_tools /
 			<= Hero_name $mol_text text <= hero_name \
 			<= Logout $mol_button_minor
+				hint \Выйти
 				sub / <= Logout_icon $mol_icon_logout
 				click? <=> logout? null
+		<= Feedback $mol_link_source
+			hint \Обратная связь
+			Icon <= Feedback_icon $mol_icon_thumb_up_outline
+			uri \https://survey.hyoo.ru/#!meet=0sHWNX63_W9XJhwNB
 		<= Telegram $mol_link_source
+			hint \Группа для разработчиков
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
 		<= Sources $mol_link_source uri \https://github.com/Lyumih/sib
