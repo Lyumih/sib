@@ -7766,9 +7766,20 @@ var $;
 "use strict";
 
 ;
-	($.$mol_icon_telegram) = class $mol_icon_telegram extends ($.$mol_icon) {
+	($.$mol_icon_thumb_up) = class $mol_icon_thumb_up extends ($.$mol_icon) {
 		path(){
-			return "M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z";
+			return "M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_thumb_up_outline) = class $mol_icon_thumb_up_outline extends ($.$mol_icon) {
+		path(){
+			return "M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z";
 		}
 	};
 
@@ -7812,6 +7823,17 @@ var $;
 		}
 	};
 	($mol_mem(($.$mol_link_source.prototype), "Icon"));
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_telegram) = class $mol_icon_telegram extends ($.$mol_icon) {
+		path(){
+			return "M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z";
+		}
+	};
 
 
 ;
@@ -10649,6 +10671,7 @@ var $;
 		}
 		Logout(){
 			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ("Выйти");
 			(obj.sub) = () => ([(this.Logout_icon())]);
 			(obj.click) = (next) => ((this.logout(next)));
 			return obj;
@@ -10661,12 +10684,24 @@ var $;
 			(obj.sub) = () => ((this.user_tools()));
 			return obj;
 		}
+		Feedback_icon(){
+			const obj = new this.$.$mol_icon_thumb_up_outline();
+			return obj;
+		}
+		Feedback(){
+			const obj = new this.$.$mol_link_source();
+			(obj.hint) = () => ("Обратная связь");
+			(obj.Icon) = () => ((this.Feedback_icon()));
+			(obj.uri) = () => ("https://survey.hyoo.ru/#!meet=0sHWNX63_W9XJhwNB");
+			return obj;
+		}
 		Telegram_icon(){
 			const obj = new this.$.$mol_icon_telegram();
 			return obj;
 		}
 		Telegram(){
 			const obj = new this.$.$mol_link_source();
+			(obj.hint) = () => ("Группа для разработчиков");
 			(obj.Icon) = () => ((this.Telegram_icon()));
 			(obj.uri) = () => ("https://t.me/h_y_o_o/4484");
 			return obj;
@@ -10717,6 +10752,7 @@ var $;
 		tools(){
 			return [
 				(this.User_tools()), 
+				(this.Feedback()), 
 				(this.Telegram()), 
 				(this.Sources())
 			];
@@ -10731,6 +10767,8 @@ var $;
 	($mol_mem(($.$sib_app.prototype), "logout"));
 	($mol_mem(($.$sib_app.prototype), "Logout"));
 	($mol_mem(($.$sib_app.prototype), "User_tools"));
+	($mol_mem(($.$sib_app.prototype), "Feedback_icon"));
+	($mol_mem(($.$sib_app.prototype), "Feedback"));
 	($mol_mem(($.$sib_app.prototype), "Telegram_icon"));
 	($mol_mem(($.$sib_app.prototype), "Telegram"));
 	($mol_mem(($.$sib_app.prototype), "Sources"));
