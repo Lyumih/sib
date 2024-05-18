@@ -19,23 +19,23 @@ namespace $.$$ {
 	type Hero = $sib_hero_Hero_Type
 	export class $sib_hero extends $.$sib_hero {
 
+		// @$mol_mem
+		// static hero( next?: HeroProps | null ) {
+		// 	const user = $sib_app.user()
+		// 	if( user ) {
+		// 		if( next === undefined && $mol_state_local.value<Hero>( 'hero' ) ) return $mol_state_local.value<Hero>( 'hero' )
+		// 		return $mol_state_local.value<Hero>( 'hero', next === null ? null : $sib_fetch.post<Hero, HeroProps>( '/hero', user ) )
+		// 	}
+		// }
+
 		@$mol_mem
-		static hero( next?: HeroProps | null ) {
-			const user = $sib_app.user()
-			if( user ) {
-				if( next === undefined && $mol_state_local.value<Hero>( 'hero' ) ) return $mol_state_local.value<Hero>( 'hero' )
-				return $mol_state_local.value<Hero>( 'hero', next === null ? null : $sib_fetch.post<Hero, HeroProps>( '/hero', user ) )
-			}
+		hero() {
+			return this.user().Hero()?.remote_ensure()
 		}
 
 		@$mol_mem
-		hero(next?:any) {
-			return $sib_hero.hero()
-		}
-
-		@$mol_mem
-		hero_name(): string {
-			return this.hero()?.name || 'no name'
+		hero_name(next?: string): string {
+			return this.hero()?.Name(next)?.val(next) || 'no name'
 		}
 
 		@$mol_mem
@@ -76,6 +76,10 @@ namespace $.$$ {
 
 		stats(): string {
 			return `Открыто островов: ${ this.hero()?.stats?.islands || 0 }`
+		}
+		
+		username( next?: string | undefined ): string {
+			return this.user()?.Username( next )?.val( next ) ?? ''
 		}
 	}
 }

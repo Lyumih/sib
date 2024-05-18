@@ -1,5 +1,6 @@
 $sib_app $mol_page
 	title \Энтропия - альтернативный мир
+	realm $hyoo_crus_realm
 	plugins /
 		<= Theme $mol_theme_auto theme \$mol_theme_light
 	tools /
@@ -18,8 +19,9 @@ $sib_app $mol_page
 			Icon <= Telegram_icon $mol_icon_telegram
 			uri \https://t.me/h_y_o_o/4484
 		<= Sources $mol_link_source uri \https://github.com/Lyumih/sib
+		<= Crus_status $hyoo_crus_status realm <= realm
 	body /
-		<= Auth $sib_about
+		- <= Auth $sib_about
 		<= Pages $mol_book2_catalog
 			menu_title \Компас
 			param \p
@@ -27,5 +29,6 @@ $sib_app $mol_page
 				\
 					<= About_page $sib_about
 				h <= Hero_page $sib_hero
+					user <= user $sib_user
 				i <= Island_page $sib_island
 				c <= Create_page $sib_create

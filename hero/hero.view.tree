@@ -1,6 +1,11 @@
 $sib_hero $mol_page
 	title \Зеркало
+	user $sib_user
 	body /
+		<= Username_labeler $mol_labeler 
+			title \Пользователь
+			content / <= Username $mol_string
+				value? <=> username? \
 		<= Hero_name $mol_labeler 
 			title \Имя
 			content / <= hero_name \
